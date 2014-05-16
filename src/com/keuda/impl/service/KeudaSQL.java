@@ -1978,4 +1978,501 @@ public class KeudaSQL implements IKeudaSQL {
             }
         }
     }
+
+    @Override
+    public Dipa createDipa(Dipa dipa, Connection conn) throws SQLException {
+        PreparedStatement pstat = null;
+        try {
+            pstat = conn.prepareStatement("insert into "
+                                +IDBCConstant.TABLE_DIPA+" ("
+                                +IDBCConstant.ATT_DIPA_DIPAINDEX+", "
+                                +IDBCConstant.ATT_DIPA_THNANGGARAN+", "
+                                +IDBCConstant.ATT_DIPA_NOMORDIPA+") values (?,?,?)");
+            pstat.setLong(1, dipa.getDipaindex());
+            pstat.setInt(2, dipa.getThnanggaran());
+            pstat.setString(3, dipa.getNomordipa());
+            
+            pstat.execute();
+            
+            return dipa;
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Menambahkan Dipa.\n "+e.toString());
+        }finally{
+            if(pstat != null)
+                pstat.close();
+        }
+    }
+
+    @Override
+    public void updateDipa(long oldDipaIndex, Dipa dipa, Connection conn) throws SQLException {
+        PreparedStatement pstat = null;
+        try {
+            pstat = conn.prepareStatement("update "
+                        +IDBCConstant.TABLE_DIPA+" set "
+                        +IDBCConstant.ATT_DIPA_THNANGGARAN+" = ?,"
+                        +IDBCConstant.ATT_DIPA_NOMORDIPA+"=? where "
+                        +IDBCConstant.ATT_DIPA_DIPAINDEX+"= ?");
+            pstat.setInt(1, dipa.getThnanggaran());
+            pstat.setString(2, dipa.getNomordipa());
+            pstat.setLong(3, oldDipaIndex);
+            
+            pstat.execute();
+            
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal memutakhirkan DIPA. \n"+e.toString());
+        }finally{
+            if(pstat != null)
+                pstat.close();
+        }
+    }
+
+    @Override
+    public void deleteDipa(long dipaIndex, Connection conn) throws SQLException {
+        PreparedStatement pstat = null;
+        try {
+            pstat = conn.prepareStatement("delete from "
+                            +IDBCConstant.TABLE_DIPA+" where "
+                            +IDBCConstant.ATT_DIPA_DIPAINDEX+"=?");
+            pstat.setLong(1, dipaIndex);
+            
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Menghapus DIPA. \n"+e.toString());
+        }finally{
+            if(pstat!= null){
+                pstat.close();
+            }
+        }
+    }
+
+    @Override
+    public Dipa getDipa(long dipaindex, Connection conn) throws SQLException {
+        Statement s = null;
+        ResultSet rs = null;
+        Dipa dipa = null;
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery("select * from "+IDBCConstant.TABLE_DIPA
+                            +" where "+IDBCConstant.ATT_DIPA_DIPAINDEX+"="+dipaindex);
+            
+            
+            while(rs.next()){
+                dipa = new Dipa(rs.getLong(IDBCConstant.ATT_DIPA_DIPAINDEX), 
+                        rs.getInt(IDBCConstant.ATT_DIPA_THNANGGARAN), 
+                        rs.getString(IDBCConstant.ATT_DIPA_NOMORDIPA));
+                
+            }
+            
+            return dipa;
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Mengambil Data Dipa. \n"+e.toString());
+        }finally{
+            if(rs!= null){
+                rs.close();
+            }
+            
+            if(s!= null){
+                s.close();
+            }
+        }
+    }
+
+    @Override
+    public Dipa[] getAllDipa(Connection conn) throws SQLException {
+        Statement s = null;
+        ResultSet rs = null;
+        Vector<Dipa> vResult = new Vector<>();
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery("select * from "+IDBCConstant.TABLE_DIPA
+                                +" order by "+IDBCConstant.ATT_DIPA_THNANGGARAN);
+            if(rs!=null){
+                while (rs.next()){
+                    vResult.addElement(new Dipa(rs.getLong(IDBCConstant.ATT_DIPA_DIPAINDEX), 
+                        rs.getInt(IDBCConstant.ATT_DIPA_THNANGGARAN), 
+                        rs.getString(IDBCConstant.ATT_DIPA_NOMORDIPA)));
+                }
+                
+                Dipa[] results = new Dipa[vResult.size()];
+                vResult.copyInto(results);
+                return results;
+            }else
+                return null;
+            
+            
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Mengambil List Dipa. \n"+e.toString());
+        }finally{
+            if(rs != null){
+                rs.close();
+            }
+            
+            if(s != null){
+                s.close();
+            }
+        }
+    }
+
+    @Override
+    public Dipa[] getAllDipaByTahunAnggaran(int tahunAnggaran, Connection conn) throws SQLException {
+        Statement s = null;
+        ResultSet rs = null;
+        Vector<Dipa> vResults = new Vector<>();
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery("select * from "+IDBCConstant.TABLE_DIPA+" where "
+                                +IDBCConstant.ATT_DIPA_THNANGGARAN+"="+tahunAnggaran+" order by"
+                                +IDBCConstant.ATT_DIPA_DIPAINDEX);
+            
+            if(rs !=null){
+                while (rs.next()){
+                    vResults.addElement(new Dipa(rs.getLong(IDBCConstant.ATT_DIPA_DIPAINDEX), 
+                        rs.getInt(IDBCConstant.ATT_DIPA_THNANGGARAN), 
+                        rs.getString(IDBCConstant.ATT_DIPA_NOMORDIPA)));
+                }
+                Dipa[] results = new Dipa[vResults.size()];
+                vResults.copyInto(results);
+                return results;
+            }else
+                return null;
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Mengambil List DIPA BY Tahun Anggaran. \n"
+                                    +e.toString());
+        }
+    }
+
+    @Override
+    public Rincian createRincian(Rincian rincian, Connection conn) throws SQLException {
+        PreparedStatement pstat = null;
+        try {
+            pstat = conn.prepareStatement("insert into "+IDBCConstant.TABLE_RINCIAN+" ("
+                                        +IDBCConstant.ATT_RINCIAN_RNCIANINDEX+", "
+                                        +IDBCConstant.ATT_RINCIAN_DIPAINDEX+", "
+                                        +IDBCConstant.ATT_RINCIAN_KEGIATAN+") values (?,?,?)");
+            pstat.setLong(1, rincian.getRincianindex());
+            pstat.setLong(2, rincian.getDipaindex());
+            pstat.setLong(3, rincian.getKegiatan());
+            
+            pstat.execute();
+            
+            return rincian;
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Menambahkan Rincian.\n"+e.toString());
+        }finally{
+            if(pstat != null){
+                pstat.close();
+                        
+            }
+        }
+    }
+
+    @Override
+    public void updateRincian(long oldrincianindex, Rincian rincian, Connection conn) throws SQLException {
+        PreparedStatement pstat = null;
+        try {
+            pstat = conn.prepareStatement("update "+IDBCConstant.TABLE_RINCIAN
+                                        +" set "+IDBCConstant.ATT_RINCIAN_DIPAINDEX+"=?, "
+                                        +IDBCConstant.ATT_RINCIAN_KEGIATAN+"=? where "
+                                        +IDBCConstant.ATT_RINCIAN_RNCIANINDEX+"=?");
+            pstat.setLong(1, rincian.getDipaindex());
+            pstat.setLong(2, rincian.getKegiatan());
+            pstat.setLong(3, oldrincianindex);
+            pstat.execute();
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Dalam Memutakhirkan Rincian.\n"+e.toString());
+        }finally{
+            if(pstat != null){
+                pstat.close();
+            }
+        }
+    }
+
+    @Override
+    public void deleteRincian(long rincianIndex, Connection conn) throws SQLException {
+        PreparedStatement pstat = null;
+        try {
+            pstat = conn.prepareStatement("delete from "+IDBCConstant.TABLE_RINCIAN
+                                        +" where "+IDBCConstant.ATT_RINCIAN_RNCIANINDEX+"=?");
+            pstat.setLong(1, rincianIndex);
+            pstat.execute();
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Menghapus Rincian.\n"+e.toString());
+        }
+    }
+
+    @Override
+    public Rincian getRincian(long rincianIndex, Connection conn) throws SQLException {
+        Statement s = null;
+        ResultSet rs = null;
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery("select * from "+IDBCConstant.TABLE_RINCIAN
+                                +" where "+IDBCConstant.ATT_RINCIAN_RNCIANINDEX+"="+rincianIndex);
+            
+            if(rs != null){
+                Dipa dipa = null;
+                KegiatanDipa kedip = null;
+                Rincian rincian = null;
+                while(rs.next()){
+                    dipa = getDipa(rs.getLong(IDBCConstant.ATT_RINCIAN_DIPAINDEX), conn);
+                    kedip = getKegiatanDipa(rs.getLong(IDBCConstant.ATT_RINCIAN_KEGIATAN), conn);
+                    rincian = new Rincian(rs.getLong(IDBCConstant.ATT_RINCIAN_RNCIANINDEX), kedip, dipa);
+                }
+                
+                return rincian;
+            }else
+                return null;
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Dalam Mengambil Data Rincian.\n"+e.toString());
+        }finally{
+            if(rs != null){
+                rs.close();
+            }
+                
+           if(s != null){
+               s.close();
+           }
+           
+        }
+    }
+
+    @Override
+    public Rincian[] getAllRincian(Connection conn) throws SQLException {
+        Statement s = null;
+        ResultSet rs = null;
+        Vector<Rincian> vResults = new Vector<>();
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery("select * from "+IDBCConstant.TABLE_RINCIAN
+                                +" order by "+IDBCConstant.ATT_RINCIAN_DIPAINDEX);
+            if(rs != null){
+                
+                while(rs.next()){
+                    Dipa dipa = getDipa(rs.getLong(IDBCConstant.ATT_RINCIAN_DIPAINDEX), conn);
+                    KegiatanDipa kedip = getKegiatanDipa(rs.getLong(IDBCConstant.ATT_RINCIAN_KEGIATAN), conn);
+                    vResults.addElement(new Rincian(rs.getLong(IDBCConstant.ATT_RINCIAN_RNCIANINDEX), kedip, dipa));
+                    
+                }
+                Rincian[] results = new Rincian[vResults.size()];
+                vResults.copyInto(results);
+                return results;
+            }else
+                return null;
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Mengambil List Rincian. \n"+e.toString());
+        }finally{
+            if(rs != null){
+                rs.close();
+            }
+            
+            if(s != null){
+                s.close();
+            }
+        }
+    }
+
+    @Override
+    public Rincian[] getAllRincianByDipa(long dipaindex, Connection conn) throws SQLException {
+        Statement s = null;
+        ResultSet rs = null;
+        Vector<Rincian> vResults = new Vector<>();
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery("select * from "+IDBCConstant.TABLE_RINCIAN
+                                +" while "+IDBCConstant.ATT_RINCIAN_DIPAINDEX+"="+dipaindex);
+            if(rs !=null){
+                while(rs.next()){
+                    Dipa dipa = getDipa(rs.getLong(IDBCConstant.ATT_RINCIAN_DIPAINDEX), conn);
+                    KegiatanDipa kedip = getKegiatanDipa(rs.getLong(IDBCConstant.ATT_RINCIAN_KEGIATAN), conn);
+                    vResults.addElement(new Rincian(rs.getLong(IDBCConstant.ATT_RINCIAN_RNCIANINDEX), kedip, dipa));
+                }
+                
+                Rincian[] results = new Rincian[vResults.size()];
+                vResults.copyInto(results);
+                return results;
+            }else
+                return null;
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Dalam Mengambil List Rincian. \n"+e.toString());
+        }
+    }
+
+    @Override
+    public RincianDipa createRincianDipa(RincianDipa rdipa, Connection conn) throws SQLException {
+        PreparedStatement pstat = null;
+        try {
+            pstat = conn.prepareStatement("insert into "+IDBCConstant.TABLE_RINCIANDIPA
+                                        +" ("+IDBCConstant.ATT_RINCIANDIPA_RINCIANINDEX+", "
+                                        +IDBCConstant.ATT_RINCIANDIPA_KODEREKENING+", "
+                                        +IDBCConstant.ATT_RINCIANDIPA_NAMAREKENING+", "
+                                        +IDBCConstant.ATT_RINCIANDIPA_LOKASI+", "
+                                        +IDBCConstant.ATT_RINCIANDIPA_KPPN+", "
+                                        +IDBCConstant.ATT_RINCIANDIPA_CARAPENARIKAN+", "
+                                        +IDBCConstant.ATT_RINCIANDIPA_JUMLAHDANA+") values(?,?,?,?,?,?,?)");
+            pstat.setLong(1, rdipa.getRincianindex());
+            pstat.setString(2, rdipa.getKoderekening());
+            pstat.setString(3, rdipa.getNamarekening());
+            pstat.setString(4, rdipa.getLokasi());
+            pstat.setString(5, rdipa.getKppn());
+            pstat.setString(6, rdipa.getCarapenarikan());
+            pstat.setDouble(7, rdipa.getJumlahdana());
+            
+            pstat.execute();
+            
+            return rdipa;
+                    
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Dalam Menambahkan Rincian DIPA. \n"+e.toString());
+        }finally{
+            if(pstat != null){
+                pstat.close();
+            }
+        }
+    }
+
+    @Override
+    public void updateRincianDipa(long oldkodeRekening, RincianDipa rDipa, Connection conn) throws SQLException {
+        PreparedStatement pstat = null;
+        try {
+            pstat = conn.prepareStatement("update "+IDBCConstant.TABLE_RINCIANDIPA
+                                    +" set "+IDBCConstant.ATT_RINCIANDIPA_NAMAREKENING+"=?, "
+                                    +IDBCConstant.ATT_RINCIANDIPA_LOKASI+"=?, "
+                                    +IDBCConstant.ATT_RINCIANDIPA_KPPN+"=?, "
+                                    +IDBCConstant.ATT_RINCIANDIPA_CARAPENARIKAN+"=?, "
+                                    +IDBCConstant.ATT_RINCIANDIPA_JUMLAHDANA+"=? where "
+                                    +IDBCConstant.ATT_RINCIANDIPA_RINCIANINDEX+"=? and "
+                                    +IDBCConstant.ATT_RINCIANDIPA_KODEREKENING+"=?");
+            
+            pstat.setString(1, rDipa.getNamarekening());
+            pstat.setString(2, rDipa.getLokasi());
+            pstat.setString(3, rDipa.getKppn());
+            pstat.setString(4, rDipa.getCarapenarikan());
+            pstat.setDouble(5, rDipa.getJumlahdana());
+            pstat.setLong(6, oldkodeRekening);
+            pstat.setString(7, rDipa.getKoderekening());
+            
+            pstat.execute();
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Memuktahirkan Rincin DIPA. \n"+e.toString());
+        }finally{
+            if(pstat != null){
+                pstat.close();
+            }
+        }
+    }
+
+    @Override
+    public void deleteRincianDipa(long rincianIndex, String kodeRekening, Connection conn) throws SQLException {
+        PreparedStatement pstat = null;
+        try {
+            pstat = conn.prepareStatement("delete from "+IDBCConstant.TABLE_RINCIANDIPA
+                                    +" where "+IDBCConstant.ATT_RINCIANDIPA_RINCIANINDEX+"=? and "
+                                    +IDBCConstant.ATT_RINCIANDIPA_KODEREKENING+"=?");
+            pstat.setLong(1, rincianIndex);
+            pstat.setString(2, kodeRekening);
+            pstat.execute();
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Dalam Menghapus Rincian Dipa. \n"+e.toString());
+        }finally{
+            if(pstat != null){
+                pstat.close();
+            }
+        }
+    }
+
+    @Override
+    public RincianDipa getRincianDipa(long rincianindex, String koderekening, Connection conn) throws SQLException {
+        Statement s = null;
+        ResultSet rs = null;
+        
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery(koderekening);
+            if(rs != null){
+                RincianDipa rdipa = null;
+                while(rs.next()){
+                    Rincian rincian = getRincian(rs.getLong(IDBCConstant.ATT_RINCIANDIPA_RINCIANINDEX), conn);
+                    rdipa = new RincianDipa(rincian, rs.getString(IDBCConstant.ATT_RINCIANDIPA_KODEREKENING),
+                    rs.getString(IDBCConstant.ATT_RINCIANDIPA_NAMAREKENING), rs.getString(IDBCConstant.ATT_RINCIANDIPA_LOKASI),
+                    rs.getString(IDBCConstant.ATT_RINCIANDIPA_KPPN), rs.getString(IDBCConstant.ATT_RINCIANDIPA_CARAPENARIKAN), 
+                    rs.getDouble(IDBCConstant.ATT_RINCIANDIPA_JUMLAHDANA));
+                }
+                
+                return rdipa;
+            }else
+                return null;
+            
+        } catch (Exception e) {
+            
+            throw new SQLException("SQLSAP : Gagal Dalam Mengambil Data Rincian DIPA. \n"+e.toString());
+        }finally{
+            if(rs != null){
+                rs.close();
+                
+            }
+            
+            if(s != null){
+                s.close();
+            }
+        }
+    }
+
+    @Override
+    public RincianDipa[] getAllRincianDipa(Connection conn) throws SQLException {
+        Statement s = null;
+        ResultSet rs = null;
+        Vector<RincianDipa> vResult = new Vector<>();
+                
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery("select * from "+IDBCConstant.TABLE_RINCIANDIPA+" order by "+IDBCConstant.ATT_RINCIANDIPA_CARAPENARIKAN);
+            
+            if(rs != null){
+                while(rs.next()){
+                    Rincian rincian = getRincian(rs.getLong(IDBCConstant.ATT_RINCIANDIPA_RINCIANINDEX), conn);
+                    vResult.addElement(new RincianDipa(rincian, rs.getString(IDBCConstant.ATT_RINCIANDIPA_KODEREKENING),
+                    rs.getString(IDBCConstant.ATT_RINCIANDIPA_NAMAREKENING), rs.getString(IDBCConstant.ATT_RINCIANDIPA_LOKASI),
+                    rs.getString(IDBCConstant.ATT_RINCIANDIPA_KPPN), rs.getString(IDBCConstant.ATT_RINCIANDIPA_CARAPENARIKAN), 
+                    rs.getDouble(IDBCConstant.ATT_RINCIANDIPA_JUMLAHDANA)));
+                }
+                
+                RincianDipa[] result = new RincianDipa[vResult.size()];
+                vResult.copyInto(result);
+                return result;
+            }else
+                return null;
+            
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Dalam Mengambil List Rincian DIPA.\n"+e.toString());
+        }
+    }
+
+    @Override
+    public RincianDipa[] getAllRincianDipaByRincian(long rincianindex, Connection conn) throws SQLException {
+        Statement s = null;
+        ResultSet rs = null;
+        Vector<RincianDipa> vResult = new Vector<>();
+                
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery("select * from "+IDBCConstant.TABLE_RINCIANDIPA+" where "+IDBCConstant.ATT_RINCIANDIPA_RINCIANINDEX+"="+rincianindex+" order by "+IDBCConstant.ATT_RINCIANDIPA_CARAPENARIKAN);
+            
+            if(rs != null){
+                while(rs.next()){
+                    Rincian rincian = getRincian(rs.getLong(IDBCConstant.ATT_RINCIANDIPA_RINCIANINDEX), conn);
+                    vResult.addElement(new RincianDipa(rincian, rs.getString(IDBCConstant.ATT_RINCIANDIPA_KODEREKENING),
+                    rs.getString(IDBCConstant.ATT_RINCIANDIPA_NAMAREKENING), rs.getString(IDBCConstant.ATT_RINCIANDIPA_LOKASI),
+                    rs.getString(IDBCConstant.ATT_RINCIANDIPA_KPPN), rs.getString(IDBCConstant.ATT_RINCIANDIPA_CARAPENARIKAN), 
+                    rs.getDouble(IDBCConstant.ATT_RINCIANDIPA_JUMLAHDANA)));
+                }
+                
+                RincianDipa[] result = new RincianDipa[vResult.size()];
+                vResult.copyInto(result);
+                return result;
+            }else
+                return null;
+            
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal Dalam Mengambil List Rincian DIPA.\n"+e.toString());
+        }
+    }    
 }

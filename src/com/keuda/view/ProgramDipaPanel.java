@@ -95,7 +95,8 @@ public class ProgramDipaPanel extends javax.swing.JPanel implements ListSelectio
     
     public class ProgramDipaTableModel extends DefaultTableModel{
 
-        public ProgramDipaTableModel() { 
+        public ProgramDipaTableModel() {
+            
             addColumn("Kode Program");
             addColumn("Tahun Anggaran");
             addColumn("Program");

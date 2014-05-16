@@ -25,7 +25,7 @@ public class OutcomeCellTextAreaRender implements TableCellRenderer{
         k_textArea.setLineWrap(true);
         k_textArea.setWrapStyleWord(true);
         k_textArea.setOpaque(true);
-        k_scrol.setOpaque(true);
+//        k_scrol.setOpaque(true);
         k_textArea.setEditable(false);
         k_textArea.setRows(1);
     }

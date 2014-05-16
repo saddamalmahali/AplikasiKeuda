@@ -307,6 +307,8 @@ public class OutputKegiatanPanelList extends KeudaPanelButton implements ListSel
         split.setDividerLocation(200);
         getContentPane().add(split, BorderLayout.CENTER);
     }
+    
+    
     void initList(KegiatanDipa kedip){
         k_listOutput.removeAllElements();
         try {

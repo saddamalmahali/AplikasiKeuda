@@ -41,6 +41,7 @@ public class MainForm extends javax.swing.JFrame {
     KegiatanPanel kegiatanPanel;
     ProgramDipaPanel programDipaPanel;
     IndikatorKegiatanDipaPanel indikatorKegiatanDipaPanel;
+    DipaComplete dipaCompletePanel;
     protected OutcomeProgramPanel outcomeProgramPanel;
     protected final int x = getWidth();
     protected final int y = getHeight();
@@ -67,6 +68,7 @@ public class MainForm extends javax.swing.JFrame {
 //        } catch (ClassNotFoundException | SQLException ex) {
 //            System.err.println("Gagal...");
 //        }
+        
         setLocationRelativeTo(null);
         setFont(new Font(Font.MONOSPACED, Font.ROMAN_BASELINE, 8));
         
@@ -99,6 +101,7 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mi_grupPengguna = new javax.swing.JMenuItem();
@@ -122,11 +125,26 @@ public class MainForm extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         mniOutputKegiatan = new javax.swing.JMenuItem();
         mni_outke_beta = new javax.swing.JMenuItem();
+        mniDIPA = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Keuangan Daerah");
 
         jDesktopPane1.setBackground(new java.awt.Color(241, 241, 241));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        jDesktopPane1.add(jPanel1);
+        jPanel1.setBounds(180, 0, 100, 100);
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/keuda/images/mnu_aplikasi.png"))); // NOI18N
         jMenu1.setToolTipText("aplikasi");
@@ -270,6 +288,14 @@ public class MainForm extends javax.swing.JFrame {
         });
         mnu_dipa.add(mni_outke_beta);
 
+        mniDIPA.setText("DIPA");
+        mniDIPA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDIPAActionPerformed(evt);
+            }
+        });
+        mnu_dipa.add(mniDIPA);
+
         jMenuBar1.add(mnu_dipa);
 
         setJMenuBar(jMenuBar1);
@@ -282,7 +308,7 @@ public class MainForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
         );
 
         pack();
@@ -300,6 +326,7 @@ public class MainForm extends javax.swing.JFrame {
         kif.setMaximizable(false);
         kif.setTitle("Master Akun");
         kif.setVisible(true);
+        
     }//GEN-LAST:event_mi_master_akunActionPerformed
 
     private void mi_master_akunMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mi_master_akunMouseClicked
@@ -342,7 +369,7 @@ public class MainForm extends javax.swing.JFrame {
             kegiatanPanel.setVisible(true);
             jDesktopPane1.add(kif);
             kif.setResizable(false);
-            kif.setSize(500, 300);
+            kif.setSize(800, 300);
             kif.setFrameIcon(new ImageIcon(getClass().getResource("/com/keuda/images/activity_18.png")));
             kif.setTitle("Master Kegiatan");
             kif.setVisible(true);
@@ -418,13 +445,12 @@ public class MainForm extends javax.swing.JFrame {
     private void mni_indikatorKegiatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_indikatorKegiatanActionPerformed
         
         KeudaInternalFrame kif = new KeudaInternalFrame();
+        
         try {
             indikatorKegiatanDipaPanel = new IndikatorKegiatanDipaPanel(this);
         } catch (KeudaException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
         
         kif.setContentPane(indikatorKegiatanDipaPanel);
         kif.setTitle("Indikator Kegiatan");
@@ -539,6 +565,31 @@ public class MainForm extends javax.swing.JFrame {
         kif.setVisible(true);
     }//GEN-LAST:event_mniIndikatorKegiatanBetaActionPerformed
 
+    private void mniDIPAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDIPAActionPerformed
+        KeudaInternalFrame kif = new KeudaInternalFrame();
+//        try {        
+            dipaCompletePanel = new DipaComplete(this);
+//        } catch (KeudaException ex) {
+//            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+        kif.setContentPane(dipaCompletePanel);
+        kif.setTitle("Indikator Kegiatan DIPA");
+        dipaCompletePanel.setVisible(true);
+        jDesktopPane1.add(kif);
+        kif.setSize(650, 450);
+//        kif.setResizable(false);
+//        kif.setMaximizable(false);
+        
+//        try {
+//            kif.setMaximum(true);
+//        } catch (PropertyVetoException ex) {
+//            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+        kif.setVisible(true);
+    }//GEN-LAST:event_mniDIPAActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -603,6 +654,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
@@ -611,6 +663,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem mi_logout;
     private javax.swing.JMenuItem mi_master_akun;
     private javax.swing.JMenuItem mi_pengguna;
+    private javax.swing.JMenuItem mniDIPA;
     private javax.swing.JMenuItem mniIndikatorKegiatanBeta;
     private javax.swing.JMenuItem mniOutputKegiatan;
     private javax.swing.JMenuItem mni_IkuProgram;

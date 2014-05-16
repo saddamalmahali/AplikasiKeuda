@@ -180,6 +180,7 @@ public class BunxuList extends JPanel {
                 }
             }
         }
+        
     }
 
     private void constructComponent() {

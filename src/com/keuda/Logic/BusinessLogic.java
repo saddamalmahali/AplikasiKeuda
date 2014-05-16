@@ -81,7 +81,6 @@ public class BusinessLogic {
         try {
             //authorized
 
-
             //end of authorized
             IKeudaSQL sql = new KeudaSQL();
             sql.createAkunStruktur(parentAkun, subAkun, k_conn);
@@ -201,7 +200,6 @@ public class BusinessLogic {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
-
         try {
             //authorized            
 
@@ -232,7 +230,6 @@ public class BusinessLogic {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
-
         try {
             //authorized            
 
@@ -248,7 +245,6 @@ public class BusinessLogic {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
-
         try {
             //authorized            
 
@@ -741,9 +737,8 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    
-    public KegiatanDipa createKegiatanDipa(KegiatanDipa kedip, long sessionId, String modul)throws KeudaException{
+
+    public KegiatanDipa createKegiatanDipa(KegiatanDipa kedip, long sessionId, String modul) throws KeudaException {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
@@ -757,8 +752,8 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    public KegiatanDipa updateKegiatanDipa(long oldKedip, KegiatanDipa kedip, long sessionId, String modul)throws KeudaException{
+
+    public KegiatanDipa updateKegiatanDipa(long oldKedip, KegiatanDipa kedip, long sessionId, String modul) throws KeudaException {
         try {
             IKeudaSQL sql = new KeudaSQL();
             sql.updateKegiatanDipa(oldKedip, kedip, k_conn);
@@ -766,10 +761,10 @@ public class BusinessLogic {
         } catch (SQLException ex) {
             throw new KeudaException(ex.getMessage());
         }
-        
+
     }
-    
-    public void deleteKegiatanDipa(long kegiatandipaindex, long sessionId, String modul)throws KeudaException{
+
+    public void deleteKegiatanDipa(long kegiatandipaindex, long sessionId, String modul) throws KeudaException {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
@@ -783,8 +778,8 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    public KegiatanDipa getKegiatanDipa(long kegiatandipaindex, String modul)throws KeudaException{
+
+    public KegiatanDipa getKegiatanDipa(long kegiatandipaindex, String modul) throws KeudaException {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
@@ -798,8 +793,8 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    public KegiatanDipa[] getAllKegiatanDipa(long sessionId, String modul)throws KeudaException{
+
+    public KegiatanDipa[] getAllKegiatanDipa(long sessionId, String modul) throws KeudaException {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
@@ -813,8 +808,8 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    public IndikatorKegiatan createIndikatorKegiatan(IndikatorKegiatan inke, long sessionId, String modul)throws KeudaException{
+
+    public IndikatorKegiatan createIndikatorKegiatan(IndikatorKegiatan inke, long sessionId, String modul) throws KeudaException {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
@@ -828,8 +823,8 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    public IndikatorKegiatan updateIndikatorKegiatan(IndikatorKegiatan inke, long sessionId, String modul)throws KeudaException{
+
+    public IndikatorKegiatan updateIndikatorKegiatan(IndikatorKegiatan inke, long sessionId, String modul) throws KeudaException {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
@@ -844,8 +839,8 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    public void deleteIndikatorKegiatan(long kegiatanDipa, int nrIndikator, long sessionId, String modul)throws KeudaException{
+
+    public void deleteIndikatorKegiatan(long kegiatanDipa, int nrIndikator, long sessionId, String modul) throws KeudaException {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
@@ -859,8 +854,8 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    public IndikatorKegiatan getIndikatorKegiatan(long kegiatanDipa, int nrKegiatan, long sessionId, String modul)throws KeudaException{
+
+    public IndikatorKegiatan getIndikatorKegiatan(long kegiatanDipa, int nrKegiatan, long sessionId, String modul) throws KeudaException {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
@@ -874,8 +869,8 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    public IndikatorKegiatan[] getAllIndikatorKegiatan(long sessionId, String modul)throws KeudaException{
+
+    public IndikatorKegiatan[] getAllIndikatorKegiatan(long sessionId, String modul) throws KeudaException {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
@@ -889,8 +884,8 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    public OutputKegiatan createOutputKegiatan(OutputKegiatan ouke, long sessionId, String modul)throws KeudaException{
+
+    public OutputKegiatan createOutputKegiatan(OutputKegiatan ouke, long sessionId, String modul) throws KeudaException {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
@@ -904,8 +899,8 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    public OutputKegiatan updateOutputKegiatan(OutputKegiatan ouke, long sessionId, String modul)throws KeudaException{
+
+    public OutputKegiatan updateOutputKegiatan(OutputKegiatan ouke, long sessionId, String modul) throws KeudaException {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
@@ -920,8 +915,8 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    public void deleteOutputKegiatan(long kegiatanDipa, int nrOutput, long sessionId, String modul)throws KeudaException{
+
+    public void deleteOutputKegiatan(long kegiatanDipa, int nrOutput, long sessionId, String modul) throws KeudaException {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
@@ -935,8 +930,8 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    public OutputKegiatan getOutputKegiatan(long kegiatanDipa, int nrOutput, long sessionId, String modul)throws KeudaException{
+
+    public OutputKegiatan getOutputKegiatan(long kegiatanDipa, int nrOutput, long sessionId, String modul) throws KeudaException {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
@@ -950,8 +945,8 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    public OutputKegiatan[] getAllOutputKegiatan(long sessionId, String modul)throws KeudaException{
+
+    public OutputKegiatan[] getAllOutputKegiatan(long sessionId, String modul) throws KeudaException {
         //Initialized Authorization Business Logic
 
         //end of initialized Authorization Business Logic
@@ -965,9 +960,9 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    public OutputKegiatan[] getAllOutputKegiatanByKegiatan(long kegiatanDipa, long sessionId, String modul)throws KeudaException{
-        
+
+    public OutputKegiatan[] getAllOutputKegiatanByKegiatan(long kegiatanDipa, long sessionId, String modul) throws KeudaException {
+
         try {
             IKeudaSQL sql = new KeudaSQL();
             return sql.getAllOutputKegiatanByKegiatan(kegiatanDipa, k_conn);
@@ -975,11 +970,176 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
-    
-    public IndikatorKegiatan[] getAllIndikatorKegiatanByKegiatan(long kegiatanDipa, long sessionId, String modul)throws KeudaException{
+
+    public IndikatorKegiatan[] getAllIndikatorKegiatanByKegiatan(long kegiatanDipa, long sessionId, String modul) throws KeudaException {
         try {
             IKeudaSQL sql = new KeudaSQL();
             return sql.getAllIndikatorKegiatanByKegiatan(kegiatanDipa, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+
+    Dipa createDipa(Dipa dipa, long sessionId, String modul) throws KeudaException {
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.createDipa(dipa, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+
+    public Dipa updateDipa(long oldDipaIndex, Dipa dipa, long sessionId, String modul) throws KeudaException {
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.updateDipa(oldDipaIndex, dipa, k_conn);
+            return dipa;
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+
+    void deleteDipa(long dipaIndex, long sessionId, String modul) throws KeudaException {
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.deleteDipa(dipaIndex, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+
+    public Dipa getDipa(long dipaIndex, long sessionId, String modul) throws KeudaException {
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getDipa(dipaIndex, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+
+    public Dipa[] getAllDipa(long sessionId, String modul) throws KeudaException {
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllDipa(k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+
+    public Dipa[] getAllDipaByTahunAnggaran(int tahunAnggaran, long sessionId, String modul) throws KeudaException {
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllDipaByTahunAnggaran(tahunAnggaran, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    Rincian createRincian(Rincian rincian, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.createRincian(rincian, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Rincian updateRincian(long oldrincianindex, Rincian rincian, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.updateRincian(oldrincianindex, rincian, k_conn);
+            return rincian;
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void deleteRincian(long rincianindex, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.deleteRincian(rincianindex, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Rincian getRincian(long rincianindex, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getRincian(rincianindex, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Rincian[] getAllRincian(long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllRincian(k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Rincian[] getAllRincianByDipa(long dipaindex, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllRincianByDipa(dipaindex, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    RincianDipa createRincianDipa(RincianDipa rdipa, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.createRincianDipa(rdipa, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public RincianDipa updateRincianDipa(long oldKodeRekening, RincianDipa rdipa, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.updateRincianDipa(oldKodeRekening, rdipa, k_conn);
+            return rdipa;
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void deleteRincianDipa(long rincianindex, String koderekening, Connection conn )throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.deleteRincianDipa(rincianindex, koderekening, conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public RincianDipa getRincianDipa(long rincianindex, String koderekening, long sessionid, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getRincianDipa(rincianindex, koderekening, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public RincianDipa[] getAllRincianDipa(long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllRincianDipa(k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public RincianDipa[] getRincianDipaByRincian(long rincianindex, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllRincianDipaByRincian(rincianindex, k_conn);
         } catch (Exception e) {
             throw new KeudaException(e.getMessage());
         }

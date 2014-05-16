@@ -5,6 +5,7 @@
 package com.keuda.services;
 
 import com.keuda.model.Akun;
+import com.keuda.model.Dipa;
 import com.keuda.model.IkuProgram;
 import com.keuda.model.IndikatorKegiatan;
 import com.keuda.model.Kegiatan;
@@ -13,8 +14,11 @@ import com.keuda.model.OutcomeProgram;
 import com.keuda.model.OutputKegiatan;
 import com.keuda.model.Program;
 import com.keuda.model.ProgramDipa;
+import com.keuda.model.Rincian;
+import com.keuda.model.RincianDipa;
 import com.keuda.view.AkunStructureForTree;
 import java.sql.Connection;
+import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
 
 /**
@@ -153,9 +157,8 @@ public interface IKeudaSQL {
     IndikatorKegiatan getIndikatorKegiatan(long kegiatanDipa, int nroutput, Connection conn) throws SQLException;
 
     IndikatorKegiatan[] getAllIndikatorKegiatan(Connection conn) throws SQLException;
-    
-    IndikatorKegiatan[] getAllIndikatorKegiatanByKegiatan(long kegiatanDipa, Connection conn)throws SQLException;
-    
+
+    IndikatorKegiatan[] getAllIndikatorKegiatanByKegiatan(long kegiatanDipa, Connection conn) throws SQLException;
 
     //Output Kegiatan
     OutputKegiatan createOutputKegiatan(OutputKegiatan ouke, Connection conn) throws SQLException;
@@ -169,4 +172,44 @@ public interface IKeudaSQL {
     OutputKegiatan[] getAllOutputKegiatan(Connection conn) throws SQLException;
 
     OutputKegiatan[] getAllOutputKegiatanByKegiatan(long kegiatanDipa, Connection conn) throws SQLException;
+
+    /**
+     * DIPA, RINCIAN & RINCIAN DIPA
+     */
+    Dipa createDipa(Dipa dipa, Connection conn) throws SQLException;
+
+    void updateDipa(long oldDipaIndex, Dipa dipa, Connection conn) throws SQLException;
+
+    void deleteDipa(long dipaIndex, Connection conn) throws SQLException;
+
+    Dipa getDipa(long dipaindex, Connection conn) throws SQLException;
+
+    Dipa[] getAllDipa(Connection conn) throws SQLException;
+
+    Dipa[] getAllDipaByTahunAnggaran(int tahunAnggaran, Connection conn) throws SQLException;
+
+    Rincian createRincian(Rincian rincian, Connection conn) throws SQLException;
+
+    void updateRincian(long oldrincianindex, Rincian rincian, Connection conn) throws SQLException;
+
+    void deleteRincian(long rincianIndex, Connection conn) throws SQLException;
+
+    Rincian getRincian(long rincianIndex, Connection conn) throws SQLException;
+
+    Rincian[] getAllRincian(Connection conn) throws SQLException;
+
+    Rincian[] getAllRincianByDipa(long dipaindex, Connection conn) throws SQLException;
+
+    RincianDipa createRincianDipa(RincianDipa rdipa, Connection conn) throws SQLException;
+
+    void updateRincianDipa(long oldkodeRekening, RincianDipa rDipa, Connection conn) throws SQLException;
+
+    void deleteRincianDipa(long rincianIndex, String kodeRekening, Connection conn) throws SQLException;
+
+    RincianDipa getRincianDipa(long rincianindex, String koderekening, Connection conn) throws SQLException;
+
+    RincianDipa[] getAllRincianDipa(Connection conn) throws SQLException;
+
+    RincianDipa[] getAllRincianDipaByRincian(long rincianindex, Connection conn) throws SQLException;
+
 }

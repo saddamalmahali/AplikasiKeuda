@@ -100,5 +100,25 @@ public interface IDBCConstant {
     public static final String ATT_NAME = "name";
     public static final String UGROUP_ADMINISTRATORS = "administrator";
     
+    /**
+     * DIPA, RINCIAN & RINCIANDIPA
+     */
+    
+    public static final String TABLE_DIPA = "dipa";
+    public static final String ATT_DIPA_DIPAINDEX = "dipaindex";
+    public static final String ATT_DIPA_THNANGGARAN ="thnanggaran";
+    public static final String ATT_DIPA_NOMORDIPA = "nomordipa";
+    public static final String TABLE_RINCIAN = "rincian";
+    public static final String ATT_RINCIAN_RNCIANINDEX = "rincianindex";
+    public static final String ATT_RINCIAN_DIPAINDEX = "dipaindex";
+    public static final String ATT_RINCIAN_KEGIATAN = "kegiatan";
+    public static final String TABLE_RINCIANDIPA = "rinciandipa";
+    public static final String ATT_RINCIANDIPA_RINCIANINDEX = "rincianindex";
+    public static final String ATT_RINCIANDIPA_KODEREKENING = "koderekening";
+    public static final String ATT_RINCIANDIPA_NAMAREKENING = "namarekening";
+    public static final String ATT_RINCIANDIPA_LOKASI = "lokasi";
+    public static final String ATT_RINCIANDIPA_KPPN = "kppn";
+    public static final String ATT_RINCIANDIPA_CARAPENARIKAN = "carapenarikan";
+    public static final String ATT_RINCIANDIPA_JUMLAHDANA = "jumlahdana";
     
 }
