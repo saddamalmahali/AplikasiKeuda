@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.keuda.model;
 
 /**
@@ -13,6 +9,7 @@ public class ProgramDipa {
     private int tahunAnggaran;
     private long programindex;
     private Program program;
+    private KegiatanDipa[] kegiatandipa;
     
     public long view = -1;
     
@@ -27,7 +24,15 @@ public class ProgramDipa {
         this.programindex = program.getProgramIndex();
         this.program = program;
     }
-
+    
+    public ProgramDipa(long dipaIndex, int tahunAnggaran, Program program, KegiatanDipa[] kegiatandipa) {
+        this.dipaIndex = dipaIndex;
+        this.tahunAnggaran = tahunAnggaran;
+        this.programindex = program.getProgramIndex();
+        this.program = program;
+        this.kegiatandipa = kegiatandipa;
+    }
+    
     public ProgramDipa() {
     }
     
@@ -95,6 +100,14 @@ public class ProgramDipa {
 
     public void setView(long view) {
         this.view = view;
+    }
+
+    public void setKegiatandipa(KegiatanDipa[] kegiatandipa) {
+        this.kegiatandipa = kegiatandipa;
+    }
+
+    public KegiatanDipa[] getKegiatandipa() {
+        return kegiatandipa;
     }
     
     

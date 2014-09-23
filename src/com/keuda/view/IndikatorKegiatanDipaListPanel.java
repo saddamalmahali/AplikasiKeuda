@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.keuda.view;
 
 import com.keuda.model.IndikatorKegiatan;
@@ -195,7 +189,6 @@ public class IndikatorKegiatanDipaListPanel extends KeudaPanelButton implements 
             if(obj instanceof IndikatorKegiatan){
                 IndikatorKegiatan inkeu = (IndikatorKegiatan) obj;
                 k_inkeu = inkeu;
-                
                 
                 setData(k_inkeu);
                 k_panelButton.setState(k_panelButton.AFTER_SAVE_STATE);

@@ -8,12 +8,15 @@ import com.keuda.Logic.BusinessLogic;
 import com.keuda.exception.KeudaException;
 import com.keuda.impl.service.KeudaSQL;
 import com.keuda.model.IndikatorKegiatan;
+import com.keuda.model.Komponen;
 import com.keuda.model.Program;
+import com.keuda.model.SubKomponen;
 import com.keuda.services.IDBCConstant;
 import com.keuda.services.IKeudaSQL;
 import com.keuda.util.KoneksiAplikasi;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,18 +30,18 @@ import java.util.logging.Logger;
 public class TesMetode {
     public static void main(String[]args) throws IOException, SQLException, ClassNotFoundException{
         IKeudaSQL sql = new KeudaSQL();
+        
+//        SubKomponen subkom = new SubKomponen(1, "011", "Evaluasi Raperda tentang Perubahan APBD Provinsi TA 2014 dan "
+//                + "Raperkada tentang Penjabaran Perubahan APBD TA 2014 serta Raperda tentang APBD Provinsi TA 2015 dan "
+//                + "Raperkada tentang Penjabaran APBD TA 20");
         KoneksiAplikasi koneksi = new KoneksiAplikasi();
+//        String url = "jdbc:postgresql://localhost:5432/migrasi";
         Connection conn = koneksi.getConnection();
-        BusinessLogic logic = new BusinessLogic(conn);
-        Program p = new Program("124", "Keuda");
-        IndikatorKegiatan ike = new IndikatorKegiatan(5, 3, "bafbgsjdrg");
-        try {
-            sql.createIndikatorKegiatan(ike, conn);
-        } catch (SQLException ex) {
-            Logger.getLogger(TesMetode.class.getName()).log(Level.SEVERE, null, ex);
+        Connection conn2 = koneksi.getConnection2();
+//        sql.migrasidatarkakl(conn2, conn);
+        for(int i=2938; i<5679; i++){
+            sql.deleteDetailRincian(i, conn);
         }
-        
-        
-        System.out.println();
+//        System.out.println(list);
     }
 }

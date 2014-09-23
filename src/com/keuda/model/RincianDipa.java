@@ -16,6 +16,8 @@ public class RincianDipa {
     String namarekening;
     String lokasi;
     String kppn;
+    String jenisvolume;
+    int volume;
     String carapenarikan;
     double jumlahdana;
     Rincian k_rincian;
@@ -25,13 +27,15 @@ public class RincianDipa {
     public final long VIEW_KODEREKENING_NAMAREKENING = 0;
 
     public RincianDipa(Rincian rincian, String koderekening, String namarekening, String lokasi,
-                        String kppn, String carapemakaian, double jumlahdana) {
+                        String kppn, String jenisvolume, int volume,String carapemakaian, double jumlahdana) {
         this.k_rincian = rincian;
         this.rincianindex = rincian.getRincianindex();
         this.koderekening = koderekening;
         this.namarekening = namarekening;
         this.lokasi = lokasi;
         this.kppn = kppn;
+        this.jenisvolume = jenisvolume;
+        this.volume = volume;
         this.carapenarikan = carapemakaian;
         this.jumlahdana = jumlahdana;
     }
@@ -50,6 +54,12 @@ public class RincianDipa {
         return koderekening;
     }
 
+    public Rincian getK_rincian() {
+        return k_rincian;
+    }
+    
+    
+    
     public void setKoderekening(String koderekening) {
         this.koderekening = koderekening;
     }

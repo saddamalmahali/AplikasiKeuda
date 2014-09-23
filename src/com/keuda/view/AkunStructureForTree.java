@@ -46,6 +46,4 @@ public class AkunStructureForTree {
         this.sr = sr;
     }
     
-       
-    
 }

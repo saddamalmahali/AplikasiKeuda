@@ -47,14 +47,14 @@ public class TextAreaCellEditor extends AbstractCellEditor implements TableCellE
         
         if(isSelected){
             k_textArea.setBackground(table.getSelectionBackground());
-//            k_textArea.setForeground(table.getSelectionForeground());
-//            k_scroll.setBackground(table.getSelectionBackground());
-//            k_scroll.setForeground(table.getSelectionForeground());
+            k_textArea.setForeground(table.getSelectionForeground());
+            k_scroll.setBackground(table.getSelectionBackground());
+            k_scroll.setForeground(table.getSelectionForeground());
         }else{
             k_textArea.setBackground(table.getBackground());
-//            k_textArea.setForeground(table.getForeground());
-//            k_scroll.setBackground(table.getBackground());
-//            k_scroll.setForeground(table.getForeground());
+            k_textArea.setForeground(table.getForeground());
+            k_scroll.setBackground(table.getBackground());
+            k_scroll.setForeground(table.getForeground());
         }
         
         return k_scroll;

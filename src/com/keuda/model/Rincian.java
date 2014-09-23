@@ -13,8 +13,11 @@ package com.keuda.model;
 public class Rincian {
     private long rincianindex;
     private long dipaindex;
-    private long kegiatan;
-    private KegiatanDipa k_kedip;
+    private long subkomponen;
+    private String koderekening;
+    private String namarekening;
+    
+    private SubKomponen k_subkomponen;
     private Dipa k_dipa;
     
     long view = -1;
@@ -22,25 +25,57 @@ public class Rincian {
     public static final long VIEW_NOMORDIPA_KODEKEGIATAN = 0;
     public static final long VIEW_NOMORDIPA_NAMAKEGIATAN = 1;
     public static final long VIEW_NOMORDIPA_TAHUN_NAMAKEGIATAN = 2;
-
+    public static final long VIEW_NOMORDIPA = 3;
+    DetailRincian[] detailrincian;
     public Rincian() {
     
     }
     
     
     
-    public Rincian(long rincianindex, KegiatanDipa kedip, Dipa dipa) {
+    public Rincian(long rincianindex, SubKomponen subkomponen, Dipa dipa) {
         this.rincianindex = rincianindex;
         this.dipaindex = dipa.getDipaindex();
-        this.kegiatan = kedip.getKegiatandipaindex();
-        this.k_kedip = kedip;
+        this.subkomponen = subkomponen.getSubkomponenindex();
+        this.k_subkomponen = subkomponen;
         this.k_dipa = dipa;
     }
-
-    public Rincian(KegiatanDipa kedip, Dipa dipa) {
+    
+    public Rincian(long rincianindex, SubKomponen subkomponen, Dipa dipa, String koderekening, String namarekening) {
+        this.rincianindex = rincianindex;
         this.dipaindex = dipa.getDipaindex();
-        this.kegiatan = kedip.getKegiatandipaindex();
-        this.k_kedip = kedip;
+        this.subkomponen = subkomponen.getSubkomponenindex();
+        this.k_subkomponen = subkomponen;
+        this.k_dipa = dipa;
+        this.koderekening = koderekening;
+        this.namarekening = namarekening;
+    }
+    
+    public Rincian(long rincianindex, SubKomponen subkomponen, Dipa dipa, String koderekening, String namarekening, DetailRincian[] detailrincian) {
+        this.rincianindex = rincianindex;
+        this.dipaindex = dipa.getDipaindex();
+        this.subkomponen = subkomponen.getSubkomponenindex();
+        this.k_subkomponen = subkomponen;
+        this.k_dipa = dipa;
+        this.koderekening = koderekening;
+        this.namarekening = namarekening;
+        this.detailrincian = detailrincian;
+    }
+    
+    public Rincian( SubKomponen subkomponen, Dipa dipa, String koderekening, String namarekening) {
+        
+        this.dipaindex = dipa.getDipaindex();
+        this.subkomponen = subkomponen.getSubkomponenindex();
+        this.k_subkomponen = subkomponen;
+        this.k_dipa = dipa;
+        this.koderekening = koderekening;
+        this.namarekening = namarekening;
+    }
+
+    public Rincian(SubKomponen subkomponen, Dipa dipa) {
+        this.dipaindex = dipa.getDipaindex();
+        this.subkomponen = subkomponen.getSubkomponenindex();
+        this.k_subkomponen = subkomponen;
         this.k_dipa = dipa;
     }
     
@@ -61,21 +96,39 @@ public class Rincian {
         this.dipaindex = dipaindex;
     }
 
-    public long getKegiatan() {
-        return kegiatan;
+    public long getSubkomponen() {
+        return subkomponen;
     }
 
-    public void setKegiatan(long kegiatan) {
-        this.kegiatan = kegiatan;
+    public void setSubkomponen(long subkomponen) {
+        this.subkomponen = subkomponen;
     }
 
-    public KegiatanDipa getK_kedip() {
-        return k_kedip;
+    public SubKomponen getK_subkomponen() {
+        return k_subkomponen;
     }
 
-    public void setK_kedip(KegiatanDipa k_kedip) {
-        this.k_kedip = k_kedip;
+    public void setK_subkomponen(SubKomponen k_subkomponen) {
+        this.k_subkomponen = k_subkomponen;
     }
+
+    public String getKoderekening() {
+        return koderekening;
+    }
+
+    public void setKoderekening(String koderekening) {
+        this.koderekening = koderekening;
+    }
+
+    public String getNamarekening() {
+        return namarekening;
+    }
+
+    public void setNamarekening(String namarekening) {
+        this.namarekening = namarekening;
+    }
+
+    
 
     public Dipa getK_dipa() {
         return k_dipa;
@@ -93,15 +146,25 @@ public class Rincian {
         this.view = view;
     }
 
+    public void setDetailrincian(DetailRincian[] detailrincian) {
+        this.detailrincian = detailrincian;
+    }
+
+    public DetailRincian[] getDetailrincian() {
+        return detailrincian;
+    }
+    
+    
+
     @Override
     public String toString() {
-        if(view == VIEW_NOMORDIPA_KODEKEGIATAN)
-            return getK_dipa().getNomordipa()+"  "+getK_kedip().getK_kegiatan().getKegiatanCode();
-        else if(view == VIEW_NOMORDIPA_NAMAKEGIATAN)
-            return getK_dipa().getNomordipa()+"  "+getK_kedip().getK_kegiatan().getKegiatanName();
-        else if(view == VIEW_NOMORDIPA_TAHUN_NAMAKEGIATAN)
-            return getK_dipa().getNomordipa()+"  "+getK_dipa().getThnanggaran()+"  "+getK_kedip().getK_kegiatan().getKegiatanName();
-        else return ""+rincianindex;
+        if(view == VIEW_NOMORDIPA){
+            return getK_dipa().getNomordipa();
+        }else if(view == VIEW_NOMORDIPA_KODEKEGIATAN){
+            return getKoderekening();
+        }else{
+            return super.toString();
+        }
     }
     
     

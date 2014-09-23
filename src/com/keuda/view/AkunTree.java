@@ -33,6 +33,7 @@ public class AkunTree extends KeudaTree{
         k_sessionid = sessionId;
         setExpandsSelectedPaths(true);
         
+        
         constructComponents();
         init();
         
@@ -116,7 +117,6 @@ public class AkunTree extends KeudaTree{
             AkunStructureForTree strukturAkun = logic.getAccountStruktures(k_sessionid, IDBCConstant.MODUL_CONFIGURATION);
             
             AkunStruktur[] aks = strukturAkun.getStruktur();
-            System.out.println(strukturAkun);
             Akun[] supers = strukturAkun.getSuper();
             DefaultMutableTreeNode supernode = null;
             for(int i=0; i<supers.length; i++){

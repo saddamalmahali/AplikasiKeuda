@@ -67,8 +67,8 @@ public class OutcomeProgramPanel extends KeudaPanelButton implements ListSelecti
 //        k_table.getColumnModel().getColumn(4).setMaxWidth(200);
 //        k_table.getColumnModel().getColumn(4).setMinWidth(200);
         
-        k_table.getColumnModel().getColumn(4).setCellEditor(new OutcomeTextAreaEditor());
-        k_table.getColumnModel().getColumn(4).setCellRenderer(new OutcomeCellTextAreaRender());
+//        k_table.getColumnModel().getColumn(4).setCellEditor(new OutcomeTextAreaEditor());
+//        k_table.getColumnModel().getColumn(4).setCellRenderer(new OutcomeCellTextAreaRender());
         
         TableColumnModel cm = k_table.getColumnModel();
         

@@ -151,9 +151,12 @@ public class KegiatanDipaPanel extends KeudaPanelButton implements ListSelection
                                 .getProgramName(), "Perhatian", JOptionPane.OK_CANCEL_OPTION);
         if(config == JOptionPane.YES_OPTION){
             k_logic = new BusinessLogic(k_conn);
+            
             try {
+                
                 k_logic.deleteKegiatanDipa(k_kedip.getKegiatandipaindex(), k_sessionId, IDBCConstant.MODUL_CONFIGURATION);
                 init();
+                
             } catch (KeudaException ex) {
                 Logger.getLogger(KegiatanDipaPanel.class.getName()).log(Level.SEVERE, null, ex);
             }

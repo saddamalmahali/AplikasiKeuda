@@ -21,6 +21,11 @@ public class KegiatanDipaTableModel extends DefaultTableModel{
         addColumn("Nama Kegiatan");   //4     
     
     }
+
+    @Override
+    public boolean isCellEditable(int row, int column) {
+        return false; //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

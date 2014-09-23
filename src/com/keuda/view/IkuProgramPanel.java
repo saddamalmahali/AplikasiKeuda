@@ -22,7 +22,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.*;
 import pohaci.gumunda.cgui.DoubleCellEditor;
 import pohaci.gumunda.cgui.DoubleCellRenderer;
-import sun.swing.MenuItemLayoutHelper;
 
 /**
  *

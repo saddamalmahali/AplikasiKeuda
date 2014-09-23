@@ -36,7 +36,9 @@ public class DipaPanel extends KeudaPanel implements ListSelectionListener{
     
     public class DipaTableModel extends DefaultTableModel{
         public DipaTableModel(){
+            addColumn("Nomor DIPA");
             addColumn("Tahun Anggaran");
+            addColumn("Program DIPA");
         }
     }
 }

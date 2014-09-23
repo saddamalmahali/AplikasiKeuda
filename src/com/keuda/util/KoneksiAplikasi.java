@@ -20,9 +20,13 @@ import java.util.Properties;
 public class KoneksiAplikasi {
     
     private Connection conn;
+    private Connection conn2;
     private Properties props;
+    private Properties props2;
     private File file;
+    private File file2;
     private FileInputStream inputDataKoneksi;
+    private FileInputStream inputDataKoneksi2;
     private String username;
     private String driver;
     private String url;
@@ -33,10 +37,16 @@ public class KoneksiAplikasi {
         inputDataKoneksi = new FileInputStream(file);
         props = new Properties();
         
+        file2 = new File("./koneksi2.properties");
+        inputDataKoneksi2 = new FileInputStream(file2);
+        props2 = new Properties();
         
     }
     
+    
+    
     public Connection getConnection() throws IOException, SQLException, ClassNotFoundException{
+        
         props.load(inputDataKoneksi);
         driver = props.getProperty("jdbc.driver");
         Class.forName(driver);
@@ -50,7 +60,23 @@ public class KoneksiAplikasi {
         
         return conn;
     }
-
+    
+    public Connection getConnection2() throws IOException, SQLException, ClassNotFoundException{
+        
+        props2.load(inputDataKoneksi2);
+        driver = props2.getProperty("jdbc.driver");
+        Class.forName(driver);
+        
+        url = props2.getProperty("jdbc.url");
+        pass = props2.getProperty("jdbc.password");
+        username = props2.getProperty("jdbc.user");
+        
+        conn2 = DriverManager.getConnection(url, username, pass);
+        
+        
+        return conn2;
+    }
+    
     public String getDriver() {
         return driver;
     }

@@ -22,7 +22,8 @@ public abstract class KeudaDialog extends JDialog implements ActionListener{
     public BusinessLogic k_logic;
     public JButton k_btnOk, k_btnCancel;
     boolean k_isOk = false;
-
+    short tahun = -1;
+    
     public KeudaDialog(MainForm mainForm, String title) {
         super(mainForm, title, true);
         k_mainForm = mainForm;
@@ -35,6 +36,14 @@ public abstract class KeudaDialog extends JDialog implements ActionListener{
         super(mainForm, title, true);
         k_mainForm = mainForm;
         setSize(width, height);
+        construct();
+    }
+    
+    public KeudaDialog(MainForm mainForm, String title, int width, int height, short tahun){
+        super(mainForm, title, true);
+        k_mainForm = mainForm;
+        setSize(width, height);
+        this.tahun = tahun;
         construct();
     }
     

@@ -32,6 +32,7 @@ import javax.swing.table.TableColumnModel;
  *
  * @author user
  */
+
 public class KegiatanPanel extends KeudaPanelButton{
     
     KegiatanTableModel k_model;
@@ -257,7 +258,6 @@ public class KegiatanPanel extends KeudaPanelButton{
         name = k_table.getValueAt(k_selectedRow, 2).toString();
         if(name == null || name.trim().equals(""))
             throw new KeudaException("Isikan Nama Kegiatan");
-        
         return new Kegiatan(programIndex, kode, name);
         
         
@@ -335,10 +335,9 @@ public class KegiatanPanel extends KeudaPanelButton{
                 Kegiatan k = keg[i];
                 Program p = k_logic.getProgram(k.getProgramIndex(), k_sessionId, IDBCConstant.MODUL_CONFIGURATION);
                 k.setProgram(p);
-                k.setView(Kegiatan.VIEW_CODE);
+                k.setView(Kegiatan.VIEW_CODE_MASTER_PROGRAM);
                 k.getProgram().setView(Program.VIEW_NAME);
-                k_model.addRow(new Object[]{k, k.getProgram(), k.getKegiatanName()});
-                
+                k_model.addRow(new Object[]{k, k.getProgram().getProgramName(), k.getKegiatanCode(), k.getKegiatanName()});
             }
             
         }catch(KeudaException ex){
@@ -389,6 +388,12 @@ public class KegiatanPanel extends KeudaPanelButton{
                     k_txtProgram.setText(k_program.toString());
                     k_panelButton.setState(PanelButton.NEW_STATE);
                     setData(k_program);
+                }else{
+                    try {
+                        init();
+                    } catch (KeudaException ex) {
+                        Logger.getLogger(KegiatanPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         }

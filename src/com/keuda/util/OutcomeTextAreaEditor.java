@@ -12,7 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.table.TableCellEditor;
-import sun.security.krb5.internal.tools.Ktab;
 
 /**
  *
@@ -27,7 +26,7 @@ public class OutcomeTextAreaEditor extends AbstractCellEditor implements TableCe
         k_scroll = new JScrollPane(k_textArea);
         k_textArea.setLineWrap(true);
         k_textArea.setWrapStyleWord(true);
-        k_textArea.setOpaque(true);
+//        k_textArea.setOpaque(true);
         k_scroll.setOpaque(true);
         k_textArea.setEditable(false);
         k_textArea.setRows(1);

@@ -2,6 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.keuda.view;
 
 import com.keuda.model.Akun;
@@ -19,6 +20,7 @@ import javax.swing.tree.TreeModel;
 /**
  *
  * @author user
+ * 
  */
 public class AkunTreeCellRenderer extends JLabel implements TreeCellRenderer{
     static protected ImageIcon k_rootIcon, k_mainIcon, k_childIcon;
@@ -31,7 +33,9 @@ public class AkunTreeCellRenderer extends JLabel implements TreeCellRenderer{
 	      k_mainIcon = new ImageIcon("images/debetgroup.gif");
 	      k_childIcon = new ImageIcon("images/debetleaf.gif");
 	    } catch (Exception e) {
+                
 	      System.out.println("Tidak Dapat Mengambil Gambar : " + e);
+              
 	    }
 	  }
 

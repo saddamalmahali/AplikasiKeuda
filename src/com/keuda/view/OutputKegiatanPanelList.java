@@ -346,11 +346,9 @@ public class OutputKegiatanPanelList extends KeudaPanelButton implements ListSel
         JPanel p = new JPanel();
         p.setBorder(new EmptyBorder(new Insets(2, 5, 2, 10)));
         p.setLayout(new GridBagLayout());
-        EmptyBorder border = new EmptyBorder(new Insets(0,
-                0, 0, 20));
+        EmptyBorder border = new EmptyBorder(new Insets(0, 0, 0, 20));
         EmptyBorder border2 = new EmptyBorder(new Insets(2, 5, 2, 5));
-        EmptyBorder border3 = new EmptyBorder(new Insets(0,
-                0, 0, 10));
+        EmptyBorder border3 = new EmptyBorder(new Insets(0, 0, 0, 10));
         Dimension d = new Dimension(60, 20);
         Dimension d2 = new Dimension(200, 40);
         Dimension d3 = new Dimension(200, 100);

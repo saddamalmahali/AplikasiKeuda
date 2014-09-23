@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.keuda.Logic;
 
 import com.keuda.exception.AuthorizationException;
@@ -12,8 +8,6 @@ import com.keuda.services.IKeudaSQL;
 import com.keuda.view.AkunStructureForTree;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -21,7 +15,7 @@ import java.util.logging.Logger;
  */
 public class BusinessLogic {
 
-    private Connection k_conn;
+    private Connection k_conn = null;
 
     public BusinessLogic(Connection conn) {
         this.k_conn = conn;
@@ -554,7 +548,24 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
+    
+    
+    public ProgramDipa[] getAllProgramDipa2(long sessionId, String modul) throws KeudaException {
+        //Initialized Authorization Business Logic
 
+        //end of initialized Authorization Business Logic
+        try {
+            //authorized            
+
+            //end of authorized
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllProgramDipa2(k_conn);
+
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
     public ProgramDipa[] getProgramDipaSimple(long sessionId, String modul) throws KeudaException {
         //Initialized Authorization Business Logic
 
@@ -1026,7 +1037,7 @@ public class BusinessLogic {
         }
     }
 
-    public Dipa[] getAllDipaByTahunAnggaran(int tahunAnggaran, long sessionId, String modul) throws KeudaException {
+    public Dipa getAllDipaByTahunAnggaran(int tahunAnggaran, long sessionId, String modul) throws KeudaException {
         try {
             IKeudaSQL sql = new KeudaSQL();
             return sql.getAllDipaByTahunAnggaran(tahunAnggaran, k_conn);
@@ -1035,7 +1046,7 @@ public class BusinessLogic {
         }
     }
     
-    Rincian createRincian(Rincian rincian, long sessionId, String modul)throws KeudaException{
+    public Rincian createRincian(Rincian rincian, long sessionId, String modul)throws KeudaException{
         try {
             IKeudaSQL sql = new KeudaSQL();
             return sql.createRincian(rincian, k_conn);
@@ -1072,6 +1083,15 @@ public class BusinessLogic {
         }
     }
     
+    public Rincian[] getRincianBySubkomp(long subkomp, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getRincianBySubkomp(subkomp, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
     public Rincian[] getAllRincian(long sessionId, String modul)throws KeudaException{
         try {
             IKeudaSQL sql = new KeudaSQL();
@@ -1090,7 +1110,7 @@ public class BusinessLogic {
         }
     }
     
-    RincianDipa createRincianDipa(RincianDipa rdipa, long sessionId, String modul)throws KeudaException{
+    public RincianDipa createRincianDipa(RincianDipa rdipa, long sessionId, String modul)throws KeudaException{
         try {
             IKeudaSQL sql = new KeudaSQL();
             return sql.createRincianDipa(rdipa, k_conn);
@@ -1144,4 +1164,327 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
+    
+    /**
+     * Logic of Komponen & Sub Komponen
+     */
+    
+    
+    
+    /**
+     * Logic of Master Volume 
+     */
+    
+    public MasterVolume createMasterVolume(MasterVolume mv, long sessionId, String modul)throws KeudaException{
+        
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.createMasterVolume(mv, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+        
+    }
+    
+    public MasterVolume updateMasterVolume(long oldMasterVolumeID, MasterVolume mv, long sessionId, String modul )throws KeudaException{
+        MasterVolume master = null;
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.updateMasterVolume(oldMasterVolumeID, mv, k_conn);
+            
+            
+            return new MasterVolume(mv.getMastervolumeid(), mv.getKodevolume(), mv.getNamajenis(), mv.getDescription());
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void deleteMasterVolume(long masterVolume, long sessionId, String modul)throws KeudaException{
+        
+        
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.deleteMasterVolume(masterVolume, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public MasterVolume getMasterVolume(long masterVolumeId, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getMasterVolume(masterVolumeId, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public MasterVolume[] getAllMasterVolume(long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllMasterVolume(k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public OutputKegiatan[] getAllOutputKegiatanByTahun(short tahun, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllOutputKegiatanByTahun(tahun, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public KegiatanDipa[] getAllKegiatanDipaByTahun(short tahun, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllKegiatanDipaByTahun(tahun, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Komponen createKomponen(Komponen komponen, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            
+            return sql.createKomponen(komponen, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Komponen updateKomponen(long oldKomponenId, Komponen komponen, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.updateKomponen(oldKomponenId, komponen, k_conn);
+            return komponen;
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void deleteKomponen(long komponenId, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.deleteKomponen(komponenId, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Komponen getKomponen(long komponenId, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getKomponen(komponenId, k_conn);
+            
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Komponen[] getAllKomponen(long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllKomponen(k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Komponen[] getAllKomponenByOutputKegiatan(long outke, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllKomponenByOutputKegiatan(outke, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public SubKomponen createSubKomponen(SubKomponen subkom, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.createSubKomponen(subkom, k_conn);
+            
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public SubKomponen updateSubKomponen(long oldSubKompId, SubKomponen subkom, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.updateSubKomponen(oldSubKompId, subkom, k_conn);
+            return subkom;            
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void deleteSubKomponen(long idSubKomp, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.deleteSubKomponen(idSubKomp, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public SubKomponen getSubKomponen(long subKompId, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getSubKomponen(subKompId, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public SubKomponen[] getAllSubKomponen(long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllSubKomponen(k_conn);
+            
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public SubKomponen[] getAllSubKomponenByKomponen(long komponenId, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllSubKomponenByKomponen(komponenId, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public RincianDipaKodrek createRincianDipaKodrek(RincianDipaKodrek obj, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.createRincianDipaKodrek(obj, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public RincianDipaKodrek updateRincianDipaKodrek(long oldIndex, RincianDipaKodrek obj, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.updateRincianDipaKodrek(oldIndex, obj, k_conn);
+            return obj;
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void deleteRincianDipaKodrek(long index, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.deleteRincianDipaKodrek(index, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public RincianDipaKodrek getRincianDipaKodrek(long index, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getRincianDipaKodrek(index, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public RincianDipaKodrek[] getAllRincianDipaKodrek(long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllRincianDipaKodrek(k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public RincianDipaKodrek[] getAllRincianDipaKodrekByRincian(long rincian, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllRincianDipaKodrekByKomponen(rincian, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public DetailRincianStruktur[] getAllDetailRincianStruktur(long rincianid, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getDetailRincianStruktur(rincianid, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Markmap[] getAllMarkmap(long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllMarkmap(k_conn);
+        } catch (SQLException e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public DetailRincian createDetailRincian(DetailRincian rincian, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.createDetailRincian(rincian, k_conn);
+        } catch (SQLException e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void updateDetailRincian(long oldDetailRincianId, DetailRincian rincian, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.updateDetailRincian(oldDetailRincianId, rincian, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void deleteDetailRincian(long idDetail, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.deleteDetailRincian(idDetail, k_conn);
+        } catch (SQLException e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public KegiatanDipa getKegiatanDipaByKegiatanAndTahun(Kegiatan kegiatan, short tahun, Connection conn)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getKegiatanDipaByKegiatanAndTahun(kegiatan, tahun, conn);
+        } catch (SQLException e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Komponen getKomponenByOutput(long outputKegiatan, String komponencode, Connection conn)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getKomponenByOutput(outputKegiatan, komponencode, conn);
+        } catch (SQLException e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void migrasidatarkakl(Connection conn, Connection conn2) throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.migrasidatarkakl(conn, conn2);
+        } catch (SQLException e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
 }

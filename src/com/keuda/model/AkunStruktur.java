@@ -9,6 +9,7 @@ package com.keuda.model;
  * @author user
  */
 public class AkunStruktur {
+    
     private Akun akun;
     private long superId;
     private long subId;

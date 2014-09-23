@@ -11,11 +11,13 @@ import java.io.Serializable;
  * @author user
  */
 public class OutputKegiatan implements Serializable{
+    private long outputkegiatanindex;
     private long kegiatanDipa;
     private int nroutput;
     private String output;
     private KegiatanDipa k_kedip;
     private long view = -1;
+    Komponen[] komponen;
     
     public static final long VIEW_OUTPUT_KEGIATAN = 0;
     
@@ -23,6 +25,23 @@ public class OutputKegiatan implements Serializable{
     public static final long VIEW_KEGIATAN_DIPA_CODE_PROGRAM = 2;
     public static final long VIEW_NROUTPUT_OUTPUT = 3;
 
+    public OutputKegiatan(long outputkegiatanindex, KegiatanDipa k_kedip, int nroutput, String output) {
+            this.outputkegiatanindex = outputkegiatanindex;
+            this.k_kedip = k_kedip;
+            this.kegiatanDipa = k_kedip.getKegiatandipaindex();
+            this.nroutput = nroutput;
+            this.output = output;            
+    }
+    
+    public OutputKegiatan(long outputkegiatanindex, KegiatanDipa k_kedip, int nroutput, String output, Komponen[] komponen) {
+            this.outputkegiatanindex = outputkegiatanindex;
+            this.k_kedip = k_kedip;
+            this.kegiatanDipa = k_kedip.getKegiatandipaindex();
+            this.nroutput = nroutput;
+            this.output = output;            
+            this.komponen = komponen;
+    }
+    
     public OutputKegiatan(long kegiatanDipa, int nroutput, String output) {
         this.kegiatanDipa = kegiatanDipa;
         this.nroutput = nroutput;
@@ -36,7 +55,9 @@ public class OutputKegiatan implements Serializable{
         this.nroutput = nroutput;
         this.output = output;
     }
-
+    
+    
+    
     public KegiatanDipa getK_kedip() {
         return k_kedip;
     }
@@ -77,6 +98,25 @@ public class OutputKegiatan implements Serializable{
         this.view = view;
     }
 
+    public long getOutputkegiatanindex() {
+        return outputkegiatanindex;
+    }
+
+    public void setOutputkegiatanindex(long outputkegiatanindex) {
+        this.outputkegiatanindex = outputkegiatanindex;
+    }
+
+    public Komponen[] getKomponen() {
+        return komponen;
+    }
+
+    public void setKomponen(Komponen[] komponen) {
+        this.komponen = komponen;
+    }
+    
+    
+    
+    
     @Override
     public String toString() {
         if(view == VIEW_KEGIATAN_DIPA)

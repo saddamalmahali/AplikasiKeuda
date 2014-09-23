@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.keuda.model;
 
 import java.io.Serializable;
@@ -16,7 +12,7 @@ public class KegiatanDipa implements Serializable{
     private long kegiatan;
     private ProgramDipa k_prodi;
     private Kegiatan k_kegiatan;
-    
+    private OutputKegiatan[] outputkegiatan;
     public long view = -1;
     
     public static final long VIEW_CODE_PROGRAM = 0;
@@ -32,6 +28,15 @@ public class KegiatanDipa implements Serializable{
         this.k_kegiatan = k_kegiatan;
         this.dipaindex = k_prodi.getDipaIndex();
         this.kegiatan = k_kegiatan.getKegiatanIndex();
+    }
+    
+    public KegiatanDipa(long kegiatandipaindex, ProgramDipa k_prodi, Kegiatan k_kegiatan, OutputKegiatan[] outputkegiatan) {
+        this.kegiatandipaindex = kegiatandipaindex;
+        this.k_prodi = k_prodi;
+        this.k_kegiatan = k_kegiatan;
+        this.dipaindex = k_prodi.getDipaIndex();
+        this.kegiatan = k_kegiatan.getKegiatanIndex();
+        this.outputkegiatan = outputkegiatan;
     }
     
     public KegiatanDipa(ProgramDipa k_prodi, Kegiatan k_kegiatan){
@@ -108,7 +113,16 @@ public class KegiatanDipa implements Serializable{
     public void setKegiatandipaindex(long kegiatandipaindex) {
         this.kegiatandipaindex = kegiatandipaindex;
     }
+
+    public void setOutputkegiatan(OutputKegiatan[] outputkegiatan) {
+        this.outputkegiatan = outputkegiatan;
+    }
+
+    public OutputKegiatan[] getOutputkegiatan() {
+        return outputkegiatan;
+    }
        
+    
     
     @Override
     public String toString() {
@@ -117,9 +131,9 @@ public class KegiatanDipa implements Serializable{
         else if(view == VIEW_PROGRAM)
             return k_prodi.getProgram().getProgramName();
         else if(view == VIEW_CODE_AND_NAME_KEGIATAN){
-            return ""+k_kegiatan.getKegiatanCode()+" "+k_kegiatan.getKegiatanName();
+            return ""+k_kegiatan.getKegiatanCode()+"   "+k_kegiatan.getKegiatanName();
         }else if(view == VIEW_CODE_AND_NAME){
-            return k_prodi.getProgram().getProgramCode()+" "+k_prodi.getProgram().getProgramName();
+            return k_prodi.getProgram().getProgramCode()+"   "+k_prodi.getProgram().getProgramName();
         }else if(view ==  VIEW_TAHUN)
             return ""+k_prodi.getTahunAnggaran();
         else

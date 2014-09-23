@@ -4,7 +4,6 @@
  */
 package com.keuda.view;
 
-import com.sun.org.apache.xerces.internal.dom.DeepNodeListImpl;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JDesktopPane;

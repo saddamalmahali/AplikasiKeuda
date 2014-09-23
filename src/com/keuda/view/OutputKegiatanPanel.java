@@ -13,6 +13,11 @@ import com.keuda.services.IDBCConstant;
 import com.keuda.util.ColumnGroup;
 import com.keuda.util.GroupableTableHeader;
 import com.keuda.util.KeudaPanelButton;
+import com.keuda.util.OutcomeCellTextAreaRender;
+import com.keuda.util.OutcomeTableEditor;
+import com.keuda.util.OutcomeTextAreaEditor;
+import com.keuda.util.TextAreaCellEditor;
+import com.keuda.util.TextAreaCellRenderer;
 import java.awt.BorderLayout;
 import java.util.Calendar;
 import java.util.logging.Level;
@@ -53,6 +58,9 @@ public class OutputKegiatanPanel extends KeudaPanelButton implements ListSelecti
             }
         };
         
+//        k_table.getColumnModel().getColumn(1).setCellEditor(new OutcomeTextAreaEditor());
+//        k_table.getColumnModel().getColumn(1).setCellRenderer(new OutcomeCellTextAreaRender());
+        
         TableColumnModel cm = k_table.getColumnModel();
        
         GroupableTableHeader header = (GroupableTableHeader) k_table.getTableHeader();
@@ -87,6 +95,9 @@ public class OutputKegiatanPanel extends KeudaPanelButton implements ListSelecti
         
         k_table.getColumnModel().getColumn(5).setMaxWidth(100);
         k_table.getColumnModel().getColumn(5).setMinWidth(100);
+        
+        
+        k_table.setColumnSelectionAllowed(false);
 //        
         k_table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         k_table.getSelectionModel().addListSelectionListener(this);

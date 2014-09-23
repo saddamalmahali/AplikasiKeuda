@@ -21,30 +21,53 @@ public class KegiatanDipaListDialog extends KeudaDialog{
     
     BunxuList k_list;
     KegiatanDipa k_obj;
-
     public KegiatanDipaListDialog(MainForm mainForm) {
         super(mainForm, "Lis Kegiatan DIPA", 400, 500);
         
     }
+
+    public KegiatanDipaListDialog(short tahun, MainForm mainForm) {
+        super(mainForm, "List Kegiatan DIPA", 400, 500, tahun);
+    }
+    
     
     
     @Override
     public JComponent constructCenterPanel() {
         k_list = new BunxuList();
         
-        try {
-            KegiatanDipa[] objs = k_logic.getAllKegiatanDipa(k_mainForm.k_sessionId, IDBCConstant.MODUL_CONFIGURATION);
-            
-            for(int i=0; i<objs.length; i++){
-                KegiatanDipa obj = objs[i];
-                obj.setView(KegiatanDipa.VIEW_CODE_AND_NAME_KEGIATAN);
-                k_list.addElement(obj);
+        if(tahun != -1){
+            try {
+                System.out.println("Search by Tahun");
+                KegiatanDipa[] objs = k_logic.getAllKegiatanDipaByTahun(tahun, k_mainForm.k_sessionId, IDBCConstant.MODUL_CONFIGURATION);
+                
+                for(int i =0; i<objs.length; i++){
+                    KegiatanDipa obj = objs[i];
+                    obj.setView(KegiatanDipa.VIEW_CODE_AND_NAME_KEGIATAN);
+                    k_list.addElement(obj);
+                }
+                
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Kesalahan Mengambil Data", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Kesalahan Mengambil Data", JOptionPane.ERROR_MESSAGE);
+            
+            return k_list;
+            
+        }else{
+            try {
+                KegiatanDipa[] objs = k_logic.getAllKegiatanDipa(k_mainForm.k_sessionId, IDBCConstant.MODUL_CONFIGURATION);
+
+                for(int i=0; i<objs.length; i++){
+                    KegiatanDipa obj = objs[i];
+                    obj.setView(KegiatanDipa.VIEW_CODE_AND_NAME_KEGIATAN);
+                    k_list.addElement(obj);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Kesalahan Mengambil Data", JOptionPane.ERROR_MESSAGE);
+            }
+
+            return k_list;
         }
-        
-        return k_list;
     }
 
     @Override
