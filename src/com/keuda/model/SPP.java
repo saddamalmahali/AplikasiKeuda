@@ -6,16 +6,19 @@
 
 package com.keuda.model;
 
+import java.util.Date;
+
 /**
  *
  * @author BENDAHARA
  */
 public class SPP {
+    
     long sppid;
     long outputkegiatanid;
     long satkerid;
     long bendaharaid;
-    String departemen;
+    long bankid;
     String lokasi;
     String kewenangan;
     String jenisbelanja;
@@ -27,19 +30,22 @@ public class SPP {
     String keterangan;
     double jumlah;
     
-    OutputKegiatan outputkegiatan;
+    Date tanggalspp;
+    Date tanggalvalid;
     
+    
+    OutputKegiatan outputkegiatan;
+    BankRef bank;
     Satker satker;
     Bendahara bendahara;
     public SPP() {
         
     }
 
-    public SPP(long sppid, long outputkegiatan, long satkerid, String departemen, String lokasi, String kewenangan, String jenisbelanja, String atasnama, String alamat, String koderekening, String nospk, double jumlahspk, String keterangan, double jumlah) {
+    public SPP(long sppid, long outputkegiatan, long satkerid, String lokasi, String kewenangan, String jenisbelanja, String atasnama, String alamat, String koderekening, String nospk, double jumlahspk, String keterangan, double jumlah) {
         this.sppid = sppid;
         this.outputkegiatanid = outputkegiatan;
         this.satkerid = satkerid;
-        this.departemen = departemen;
         this.lokasi = lokasi;
         this.kewenangan = kewenangan;
         this.jenisbelanja = jenisbelanja;
@@ -52,10 +58,10 @@ public class SPP {
         this.jumlah = jumlah;
     }
 
-    public SPP(long outputkegiatan, long satkerid, String departemen, String lokasi, String kewenangan, String jenisbelanja, String atasnama, String alamat, String koderekening, String nospk, double jumlahspk, String keterangan, double jumlah) {
+    public SPP(long outputkegiatan, long satkerid, String lokasi, String kewenangan, String jenisbelanja, String atasnama, String alamat, String koderekening, String nospk, double jumlahspk, String keterangan, double jumlah) {
         this.outputkegiatanid = outputkegiatan;
         this.satkerid = satkerid;
-        this.departemen = departemen;
+        
         this.lokasi = lokasi;
         this.kewenangan = kewenangan;
         this.jenisbelanja = jenisbelanja;
@@ -69,14 +75,13 @@ public class SPP {
     }
 
     
-    public SPP(OutputKegiatan outputkegiatan, Satker satker, Bendahara bendahara,String departemen, String lokasi, String kewenangan, String jenisbelanja, String atasnama, String alamat, String koderekening, String nospk, double jumlahspk, String keterangan, double jumlah) {
+    public SPP(OutputKegiatan outputkegiatan, Satker satker, Bendahara bendahara, String lokasi, String kewenangan, String jenisbelanja, String atasnama, String alamat, String koderekening, String nospk, double jumlahspk, String keterangan, double jumlah) {
         this.outputkegiatanid = outputkegiatan.getOutputkegiatanindex();
         this.outputkegiatan = outputkegiatan;
         this.bendahara  = bendahara;
         this.bendaharaid = bendahara.getBendaharaindex();
         this.satkerid = satker.getSatkerid();
         this.satker = satker;
-        this.departemen = departemen;
         this.lokasi = lokasi;
         this.kewenangan = kewenangan;
         this.jenisbelanja = jenisbelanja;
@@ -89,6 +94,31 @@ public class SPP {
         this.jumlah = jumlah;
     }
     
+    public SPP(OutputKegiatan outputkegiatan, Satker satker, Bendahara bendahara, BankRef bank, 
+            String lokasi, String kewenangan, String jenisbelanja, String atasnama, 
+            String alamat, String koderekening,String nospk, double jumlahspk, String keterangan, double jumlah, 
+            Date tanggalspp, Date tanggalvalid) {
+        this.outputkegiatanid = outputkegiatan.getOutputkegiatanindex();
+        this.outputkegiatan = outputkegiatan;
+        this.bendahara  = bendahara;
+        this.bendaharaid = bendahara.getBendaharaindex();
+        this.satkerid = satker.getSatkerid();
+        this.satker = satker;
+        this.lokasi = lokasi;
+        this.kewenangan = kewenangan;
+        this.jenisbelanja = jenisbelanja;
+        this.atasnama = atasnama;
+        this.alamat = alamat;
+        this.koderekening = koderekening;
+        
+        
+        this.nospk = nospk;
+        this.jumlahspk = jumlahspk;
+        this.keterangan = keterangan;
+        this.jumlah = jumlah;
+        this.tanggalspp = tanggalspp;
+        this.tanggalvalid = tanggalvalid;
+    }
     
     public long getSppid() {
         return sppid;
@@ -104,16 +134,6 @@ public class SPP {
 
     public void setOutputkegiatanId(long outputkegiatan) {
         this.outputkegiatanid = outputkegiatan;
-    }
-
-    
-
-    public String getDepartemen() {
-        return departemen;
-    }
-
-    public void setDepartemen(String departemen) {
-        this.departemen = departemen;
     }
 
     public long getSatkerId() {
@@ -236,9 +256,61 @@ public class SPP {
         this.bendahara = bendahara;
     }    
 
+    public long getOutputkegiatanid() {
+        return outputkegiatanid;
+    }
+
+    public void setOutputkegiatanid(long outputkegiatanid) {
+        this.outputkegiatanid = outputkegiatanid;
+    }
+
+    public long getSatkerid() {
+        return satkerid;
+    }
+
+    public void setSatkerid(long satkerid) {
+        this.satkerid = satkerid;
+    }
+
+    public Date getTanggalspp() {
+        return tanggalspp;
+    }
+
+    public void setTanggalspp(Date tanggalspp) {
+        this.tanggalspp = tanggalspp;
+    }
+
+    public Date getTanggalvalid() {
+        return tanggalvalid;
+    }
+
+    public void setTanggalvalid(Date tanggalvalid) {
+        this.tanggalvalid = tanggalvalid;
+    }
+
+    public BankRef getBank() {
+        return bank;
+    }
+
+    public long getBankid() {
+        return bankid;
+    }
+
+    public void setBank(BankRef bank) {
+        this.bank = bank;
+    }
+
+    public void setBankid(long bankid) {
+        this.bankid = bankid;
+    }
+    
+    
+    
+    
+
     @Override
     public String toString() {
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+        return super.toString();
     }  
     
 }

@@ -35,6 +35,7 @@ import javax.swing.table.TableCellRenderer;
  */
 
 public class SPPPanel extends KeudaPanel{
+    
     MainForm k_mainform;
     JTable k_table;
     thisModel k_model;
@@ -77,6 +78,7 @@ public class SPPPanel extends KeudaPanel{
         gbc.weightx = 1.0;
         cbosatkermodel = new comboSatkerModel();
         cbosatker = new JComboBox(cbosatkermodel);
+        
         panelrinciansatker.add(cbosatker, gbc);
         
         //combo bendahara
@@ -91,6 +93,7 @@ public class SPPPanel extends KeudaPanel{
         gbc.fill = GridBagConstraints.HORIZONTAL;
         cbobendaharamodel = new comboBendaharaModel();
         cbobendahara = new JComboBox(cbobendaharamodel);
+        cbobendahara.setEnabled(false);
         panelrinciansatker.add(cbobendahara, gbc);
         
         
@@ -98,8 +101,10 @@ public class SPPPanel extends KeudaPanel{
         
         //add panel masa tanggal
         panelmasa.add(new JLabel("Periode : "));
+        tanggal.setEnabled(false);
         panelmasa.add(tanggal);
         panelmasa.add(new JLabel("Sampai : "));
+        tanggalakhir.setEnabled(false);
         panelmasa.add(tanggalakhir);
         
         //add to content panel
@@ -130,41 +135,43 @@ public class SPPPanel extends KeudaPanel{
             
             @Override
             public void onNew() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet.");
             }
             
             @Override
             public void onEdit() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet.");
             }
 
             @Override
             public void onDelete() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                throw new UnsupportedOperationException("Not supported yet.");
             }
 
             @Override
             public void onView() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-            
+                throw new UnsupportedOperationException("Not supported yet.");
+            }           
             
         };
         
         getContentPane().add(new JScrollPane(k_table), BorderLayout.CENTER);
         getContentPane().add(panel, BorderLayout.NORTH);
         getContentPane().add(panelbutton, BorderLayout.SOUTH);
+        
     }
     
     public class thisModel extends DefaultTableModel implements ListSelectionListener{
 
         public thisModel() {
+            
             addColumn("No");
             addColumn("Tanggal");
             addColumn("No SPP");
             addColumn("Status");
             
             addRow(new Object[]{"", "", "", ""});
+            
         }
 
         @Override
@@ -219,7 +226,7 @@ public class SPPPanel extends KeudaPanel{
         
         @Override
         public void itemStateChanged(ItemEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            throw new UnsupportedOperationException("Not supported yet."); 
         }
 
     }
@@ -232,7 +239,7 @@ public class SPPPanel extends KeudaPanel{
         
         @Override
         public void itemStateChanged(ItemEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            throw new UnsupportedOperationException("Not supported yet."); 
         }
         
     }

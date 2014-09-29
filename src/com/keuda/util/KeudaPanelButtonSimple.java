@@ -10,13 +10,17 @@ import javax.swing.JPanel;
 /**
  *
  * @author BENDAHARA
+ * 
  */
 public abstract class KeudaPanelButtonSimple extends KeudaPanel implements ActionListener{
+    
     private PanelButtonSimple k_panelButton;
     private JPanel k_contentPane = new JPanel(new BorderLayout());
 
     public KeudaPanelButtonSimple() {
+        
         this(null);
+        
     }
     
     public KeudaPanelButtonSimple(MainForm owner){

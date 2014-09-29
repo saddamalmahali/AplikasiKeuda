@@ -240,6 +240,7 @@ public interface IDBCConstant {
     public static final String TABLE_SPP = "spp";
     public static final String ATT_SPP_SPPINDEX = "sppindex";
     public static final String ATT_SPP_OUTPUTKEGIATAN = "outputkegiatan";
+    public static final String ATT_SPP_BANKINDEX = "bankindex";
     public static final String ATT_SPP_SATKERID = "satkerid";
     public static final String ATT_SPP_BENDAHARAID = "bendaharaid";
     public static final String ATT_SPP_LOKASI = "lokasi";
@@ -252,5 +253,17 @@ public interface IDBCConstant {
     public static final String ATT_SPP_JUMLAHSPK = "jumlahspk";
     public static final String ATT_SPP_KETERANGAN = "keterangan";
     public static final String ATT_SPP_JUMLAH = "jumlah";
+    public static final String ATT_SPP_NAMABANK = "namabank";
+    public static final String ATT_SPP_ALAMATBANK = "alamatbank";
+    public static final String ATT_SPP_TANGGALVALID = "tanggalvalid";
+    public static final String ATT_SPP_TANGGALSPP = "tanggalspp";
+    
+    //bankref
+    public static final String TABLE_BANKREF = "bankref";
+    public static final String ATT_BANKREF_IDBANK = "id";
+    public static final String ATT_BANKREF_SANDI = "sandi";
+    public static final String ATT_BANKREF_NAMABANK = "namabank";
+    public static final String ATT_BANKREF_WILAYAH = "wilayah";
+    public static final String ATT_BANKREF_ALAMAT = "alamat";
 
 }

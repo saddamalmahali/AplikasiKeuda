@@ -39,6 +39,7 @@ import org.flexdock.view.Viewport;
  */
 
 public class MainForm extends javax.swing.JFrame {
+    
     public static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     public Connection k_conn = null;
     public long k_sessionId = -1;
@@ -65,6 +66,7 @@ public class MainForm extends javax.swing.JFrame {
     private KomponenPanel komponenPanel;
     RincianKertasKerjaSatker rkkjpanel;
     SPPPanel spppanel;
+    BankPanel bankpanel;
     
     Font font = null;
     
@@ -181,9 +183,10 @@ public class MainForm extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mi_logout = new javax.swing.JMenuItem();
         mi_exit = new javax.swing.JMenuItem();
-        mnuDataMaster = new javax.swing.JMenu();
+        mniDataMaster = new javax.swing.JMenu();
         mi_master_akun = new javax.swing.JMenuItem();
         mni_satuanvolume = new javax.swing.JMenuItem();
+        mni_bank = new javax.swing.JMenuItem();
         mnuProgramKegiatan = new javax.swing.JMenu();
         mni_Program = new javax.swing.JMenuItem();
         mni_kegiatan = new javax.swing.JMenuItem();
@@ -256,8 +259,13 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        mnuDataMaster.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/keuda/images/mnu_data_master.png"))); // NOI18N
-        mnuDataMaster.setToolTipText("data master");
+        mniDataMaster.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/keuda/images/mnu_data_master.png"))); // NOI18N
+        mniDataMaster.setToolTipText("data master");
+        mniDataMaster.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniDataMasterActionPerformed(evt);
+            }
+        });
 
         mi_master_akun.setText("Master Akun");
         mi_master_akun.setToolTipText("Master Akun");
@@ -271,7 +279,7 @@ public class MainForm extends javax.swing.JFrame {
                 mi_master_akunActionPerformed(evt);
             }
         });
-        mnuDataMaster.add(mi_master_akun);
+        mniDataMaster.add(mi_master_akun);
 
         mni_satuanvolume.setText("Satuan Volume");
         mni_satuanvolume.addActionListener(new java.awt.event.ActionListener() {
@@ -279,7 +287,15 @@ public class MainForm extends javax.swing.JFrame {
                 mni_satuanvolumeActionPerformed(evt);
             }
         });
-        mnuDataMaster.add(mni_satuanvolume);
+        mniDataMaster.add(mni_satuanvolume);
+
+        mni_bank.setText("Bank");
+        mni_bank.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_bankActionPerformed(evt);
+            }
+        });
+        mniDataMaster.add(mni_bank);
 
         mnuProgramKegiatan.setText("Program & Kegiatan");
 
@@ -299,9 +315,9 @@ public class MainForm extends javax.swing.JFrame {
         });
         mnuProgramKegiatan.add(mni_kegiatan);
 
-        mnuDataMaster.add(mnuProgramKegiatan);
+        mniDataMaster.add(mnuProgramKegiatan);
 
-        jMenuBar1.add(mnuDataMaster);
+        jMenuBar1.add(mniDataMaster);
 
         mnu_dipa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/keuda/images/mnu_dipa_32x32.png"))); // NOI18N
         mnu_dipa.addActionListener(new java.awt.event.ActionListener() {
@@ -443,6 +459,7 @@ public class MainForm extends javax.swing.JFrame {
         kif.setFrameIcon(new ImageIcon(getClass().getResource("/com/keuda/images/master_account_small.png")));
         kif.setResizable(false);
         kif.setMaximizable(false);
+        kif.setSize(600, 700);
         kif.setTitle("Master Akun");
         kif.setVisible(true);
         
@@ -799,6 +816,25 @@ public class MainForm extends javax.swing.JFrame {
             kif.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void mniDataMasterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDataMasterActionPerformed
+        
+    }//GEN-LAST:event_mniDataMasterActionPerformed
+
+    private void mni_bankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_bankActionPerformed
+        KeudaInternalFrame kif = new KeudaInternalFrame();
+            bankpanel = new BankPanel(this);
+            kif.setContentPane(bankpanel);
+            bankpanel.setVisible(true);
+            jDesktopPane1.add(kif);
+            kif.setResizable(true);
+            kif.setFrameIcon(new ImageIcon(getClass().getResource("/com/keuda/images/program_18.png")));
+            kif.setTitle("Rincian Kertas Kerja Satker TA. 2014");
+            kif.setSize(1114, 500);
+//            kif.setMaximizable(false);
+            
+            kif.setVisible(true);
+    }//GEN-LAST:event_mni_bankActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -875,11 +911,13 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem mi_master_akun;
     private javax.swing.JMenuItem mi_pengguna;
     private javax.swing.JMenuItem mniDIPA;
+    private javax.swing.JMenu mniDataMaster;
     private javax.swing.JMenuItem mniIndikatorKegiatanBeta;
     private javax.swing.JMenuItem mniKomponen;
     private javax.swing.JMenuItem mniOutputKegiatan;
     private javax.swing.JMenuItem mni_IkuProgram;
     private javax.swing.JMenuItem mni_Program;
+    private javax.swing.JMenuItem mni_bank;
     private javax.swing.JMenuItem mni_indikatorKegiatan;
     private javax.swing.JMenuItem mni_kegiatan;
     private javax.swing.JMenuItem mni_kegiatanDipa;
@@ -887,7 +925,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem mni_outke_beta;
     private javax.swing.JMenuItem mni_rkkj;
     private javax.swing.JMenuItem mni_satuanvolume;
-    private javax.swing.JMenu mnuDataMaster;
     private javax.swing.JMenuItem mnuProgramDipa;
     private javax.swing.JMenu mnuProgramKegiatan;
     private javax.swing.JMenu mnu_dipa;

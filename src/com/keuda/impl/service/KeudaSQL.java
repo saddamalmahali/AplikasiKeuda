@@ -38,6 +38,7 @@ public class KeudaSQL implements IKeudaSQL {
 
     @Override
     public Akun createAkun(Akun akun, Connection conn) throws SQLException {
+        
         PreparedStatement pstat = null;
         Statement stm = null;
 
@@ -69,10 +70,14 @@ public class KeudaSQL implements IKeudaSQL {
             }
 
             return akun;
+            
         } catch (Exception e) {
+            
             conn.rollback();
             throw new SQLException("SQLSAP : Gagal Menyimpan Akun \n" + e.toString());
+            
         } finally {
+            
             if (stm != null) {
                 stm.close();
             }
@@ -4796,6 +4801,7 @@ public class KeudaSQL implements IKeudaSQL {
                                     +IDBCConstant.ATT_SPP_OUTPUTKEGIATAN+", "
                                     +IDBCConstant.ATT_SPP_SATKERID+", "
                                     +IDBCConstant.ATT_SPP_BENDAHARAID+", "
+                                    +IDBCConstant.ATT_SPP_BANKINDEX+", "
                                     +IDBCConstant.ATT_SPP_LOKASI+", "
                                     +IDBCConstant.ATT_SPP_KEWENANGAN+", "
                                     +IDBCConstant.ATT_SPP_JENISBELANJA+", "
@@ -4805,21 +4811,22 @@ public class KeudaSQL implements IKeudaSQL {
                                     +IDBCConstant.ATT_SPP_NOSPK+", "
                                     +IDBCConstant.ATT_SPP_JUMLAHSPK+", "
                                     +IDBCConstant.ATT_SPP_KETERANGAN+", "
-                                    +IDBCConstant.ATT_SPP_JUMLAH+") values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                                    +IDBCConstant.ATT_SPP_JUMLAH+") values (?,?,?,?,?,?,?,?,?,?,?,?, ?, ?)");
             
             pstat.setLong(1, spp.getOutputkegiatanId());
             pstat.setLong(2, spp.getSatkerId());
             pstat.setLong(3, spp.getBendaharaid());
-            pstat.setString(4, spp.getLokasi());
-            pstat.setString(5, spp.getKewenangan());
-            pstat.setString(6, spp.getJenisbelanja());
-            pstat.setString(7, spp.getAtasnama());
-            pstat.setString(8, spp.getAlamat());
-            pstat.setString(9, spp.getKoderekening());
-            pstat.setString(10, spp.getNospk());
-            pstat.setDouble(11, spp.getJumlahspk());
-            pstat.setString(12, spp.getKeterangan());
-            pstat.setDouble(13, spp.getJumlah());
+            pstat.setLong(4, spp.getBank().getId());
+            pstat.setString(5, spp.getLokasi());
+            pstat.setString(6, spp.getKewenangan());
+            pstat.setString(7, spp.getJenisbelanja());
+            pstat.setString(8, spp.getAtasnama());
+            pstat.setString(9, spp.getAlamat());
+            pstat.setString(10, spp.getKoderekening());
+            pstat.setString(11, spp.getNospk());
+            pstat.setDouble(12, spp.getJumlahspk());
+            pstat.setString(13, spp.getKeterangan());
+            pstat.setDouble(14, spp.getJumlah());
             pstat.execute();
             
             long sppid = getMaxIndex(IDBCConstant.ATT_SPP_SPPINDEX, IDBCConstant.TABLE_SPP, conn);
@@ -4844,6 +4851,7 @@ public class KeudaSQL implements IKeudaSQL {
                                     +IDBCConstant.ATT_SPP_OUTPUTKEGIATAN+"=?, "
                                     +IDBCConstant.ATT_SPP_SATKERID+"=?, "
                                     +IDBCConstant.ATT_SPP_BENDAHARAID+"=?, "
+                                    +IDBCConstant.ATT_SPP_BANKINDEX+"=?, "
                                     +IDBCConstant.ATT_SPP_LOKASI+"=?, "
                                     +IDBCConstant.ATT_SPP_KEWENANGAN+"=?, "
                                     +IDBCConstant.ATT_SPP_JENISBELANJA+"=?, "
@@ -4858,17 +4866,18 @@ public class KeudaSQL implements IKeudaSQL {
             pstat.setLong(1, spp.getOutputkegiatanId());
             pstat.setLong(2, spp.getSatkerId());
             pstat.setLong(3, spp.getBendaharaid());
-            pstat.setString(4, spp.getLokasi());
-            pstat.setString(5, spp.getKewenangan());
-            pstat.setString(6, spp.getJenisbelanja());
-            pstat.setString(7, spp.getAtasnama());
-            pstat.setString(8, spp.getAlamat());
-            pstat.setString(9, spp.getKoderekening());
-            pstat.setString(10, spp.getNospk());
-            pstat.setDouble(11, spp.getJumlahspk());
-            pstat.setString(12, spp.getKeterangan());
-            pstat.setDouble(13, spp.getJumlah());
-            pstat.setLong(14, oldSPPId);
+            pstat.setLong(4, spp.getBank().getId());
+            pstat.setString(5, spp.getLokasi());
+            pstat.setString(6, spp.getKewenangan());
+            pstat.setString(7, spp.getJenisbelanja());
+            pstat.setString(8, spp.getAtasnama());
+            pstat.setString(9, spp.getAlamat());
+            pstat.setString(10, spp.getKoderekening());
+            pstat.setString(11, spp.getNospk());
+            pstat.setDouble(12, spp.getJumlahspk());
+            pstat.setString(13, spp.getKeterangan());
+            pstat.setDouble(14, spp.getJumlah());
+            pstat.setLong(15, oldSPPId);
             pstat.execute();
             
         } catch (Exception e) {
@@ -4899,17 +4908,107 @@ public class KeudaSQL implements IKeudaSQL {
 
     @Override
     public SPP getSPP(long sppid, Connection conn) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        Statement s = null;
+        ResultSet rs = null;
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery("select * from "+IDBCConstant.TABLE_SPP
+                                +" where "+IDBCConstant.ATT_SPP_SPPINDEX);
+            while(rs.next()){
+                OutputKegiatan outke = getOutputKegiatan(rs.getLong(IDBCConstant.ATT_SPP_OUTPUTKEGIATAN), conn);
+                Satker satker = getSatker(rs.getLong(IDBCConstant.ATT_SPP_SATKERID), conn);
+                Bendahara bendahara = getBendahara(rs.getLong(IDBCConstant.ATT_SPP_BENDAHARAID), conn);
+                BankRef bank = getBankRef(rs.getLong(IDBCConstant.ATT_SPP_BANKINDEX), conn);
+                return new SPP(outke, satker, bendahara, bank, rs.getString(IDBCConstant.ATT_SPP_LOKASI), 
+                        rs.getString(IDBCConstant.ATT_SPP_KEWENANGAN), rs.getString(IDBCConstant.ATT_SPP_JENISBELANJA), 
+                        rs.getString(IDBCConstant.ATT_SPP_ATASNAMA), rs.getString(IDBCConstant.ATT_SPP_ALAMAT), 
+                        rs.getString(IDBCConstant.ATT_SPP_KODEREKENING), rs.getString(IDBCConstant.ATT_SPP_NOSPK), 
+                        rs.getDouble(IDBCConstant.ATT_SPP_JUMLAHSPK), rs.getString(IDBCConstant.ATT_SPP_KETERANGAN), 
+                        rs.getDouble(IDBCConstant.ATT_SPP_JUMLAH), rs.getDate(IDBCConstant.ATT_SPP_TANGGALSPP), 
+                        rs.getDate(IDBCConstant.ATT_SPP_TANGGALVALID));
+            }
+            return null;
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal mengambil data SPP. \n"+e.toString());
+        }finally{
+            if(rs!= null)
+                rs.close();
+            
+            if(s != null)
+                s.close();
+        }
     }
 
     @Override
     public SPP[] getAllSPP(Connection conn) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        Statement s = null;
+        ResultSet rs= null;
+        Vector<SPP> vResult = new Vector<>();
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery("select * from "+IDBCConstant.TABLE_SPP);
+            while(rs.next()){
+                OutputKegiatan outke = getOutputKegiatan(rs.getLong(IDBCConstant.ATT_SPP_OUTPUTKEGIATAN), conn);
+                Satker satker = getSatker(rs.getLong(IDBCConstant.ATT_SPP_SATKERID), conn);
+                Bendahara bendahara = getBendahara(rs.getLong(IDBCConstant.ATT_SPP_BENDAHARAID), conn);
+                BankRef bank = getBankRef(rs.getLong(IDBCConstant.ATT_SPP_BANKINDEX), conn);
+                vResult.addElement(new SPP(outke, satker, bendahara, bank, rs.getString(IDBCConstant.ATT_SPP_LOKASI), 
+                        rs.getString(IDBCConstant.ATT_SPP_KEWENANGAN), rs.getString(IDBCConstant.ATT_SPP_JENISBELANJA), 
+                        rs.getString(IDBCConstant.ATT_SPP_ATASNAMA), rs.getString(IDBCConstant.ATT_SPP_ALAMAT), 
+                        rs.getString(IDBCConstant.ATT_SPP_KODEREKENING), rs.getString(IDBCConstant.ATT_SPP_NOSPK), 
+                        rs.getDouble(IDBCConstant.ATT_SPP_JUMLAHSPK), rs.getString(IDBCConstant.ATT_SPP_KETERANGAN), 
+                        rs.getDouble(IDBCConstant.ATT_SPP_JUMLAH), rs.getDate(IDBCConstant.ATT_SPP_TANGGALSPP), 
+                        rs.getDate(IDBCConstant.ATT_SPP_TANGGALVALID)));
+            }
+            
+            SPP[] results = new SPP[vResult.size()];
+            vResult.copyInto(results);
+            return results;
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal dalam mengambil list SPP.\n"+e.toString());
+        }finally{
+            if(rs != null)
+                rs.close();
+            
+            if(s!= null)
+                s.close();
+        }
     }
 
     @Override
     public SPP[] getAllSPPByUnitOrganisasi(long unitorganisasiid, Connection conn) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        Statement s = null;
+        ResultSet rs= null;
+        Vector<SPP> vResult = new Vector<>();
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery("select * from "+IDBCConstant.TABLE_SPP +" where "+IDBCConstant.ATT_SPP_SATKERID+" = "+unitorganisasiid);
+            while(rs.next()){
+                OutputKegiatan outke = getOutputKegiatan(rs.getLong(IDBCConstant.ATT_SPP_OUTPUTKEGIATAN), conn);
+                Satker satker = getSatker(rs.getLong(IDBCConstant.ATT_SPP_SATKERID), conn);
+                Bendahara bendahara = getBendahara(rs.getLong(IDBCConstant.ATT_SPP_BENDAHARAID), conn);
+                BankRef bank = getBankRef(rs.getLong(IDBCConstant.ATT_SPP_BANKINDEX), conn);
+                vResult.addElement(new SPP(outke, satker, bendahara, bank, rs.getString(IDBCConstant.ATT_SPP_LOKASI), 
+                        rs.getString(IDBCConstant.ATT_SPP_KEWENANGAN), rs.getString(IDBCConstant.ATT_SPP_JENISBELANJA), 
+                        rs.getString(IDBCConstant.ATT_SPP_ATASNAMA), rs.getString(IDBCConstant.ATT_SPP_ALAMAT), 
+                        rs.getString(IDBCConstant.ATT_SPP_KODEREKENING), rs.getString(IDBCConstant.ATT_SPP_NOSPK), 
+                        rs.getDouble(IDBCConstant.ATT_SPP_JUMLAHSPK), rs.getString(IDBCConstant.ATT_SPP_KETERANGAN), 
+                        rs.getDouble(IDBCConstant.ATT_SPP_JUMLAH), rs.getDate(IDBCConstant.ATT_SPP_TANGGALSPP), 
+                        rs.getDate(IDBCConstant.ATT_SPP_TANGGALVALID)));
+            }
+            
+            SPP[] results = new SPP[vResult.size()];
+            vResult.copyInto(results);
+            return results;
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal dalam mengambil list SPP.\n"+e.toString());
+        }finally{
+            if(rs != null)
+                rs.close();
+            
+            if(s!= null)
+                s.close();
+        }
     }
 
     @Override
@@ -4958,6 +5057,7 @@ public class KeudaSQL implements IKeudaSQL {
     public void updateBendahara(long oldbendaharaid, Bendahara bendahara, Connection conn) throws SQLException {
         PreparedStatement pstat = null;
         try {
+            
             pstat = conn.prepareStatement("update "+IDBCConstant.TABLE_BENDAHARA+" set "
                                         +IDBCConstant.ATT_BENDAHARA_SATKER+"=?, "
                                         +IDBCConstant.ATT_BENDAHARA_JENISBENDAHARA+"=?, "
@@ -5114,6 +5214,204 @@ public class KeudaSQL implements IKeudaSQL {
             if(s != null){
                 s.close();
             }
+        }
+    }
+
+    @Override
+    public BankRef createBankRef(BankRef bank, Connection conn) throws SQLException {
+        PreparedStatement pstat = null;
+        try {
+            pstat = conn.prepareStatement("insert into "+IDBCConstant.TABLE_BANKREF+" ("+IDBCConstant.ATT_BANKREF_SANDI+","
+                                        +IDBCConstant.ATT_BANKREF_NAMABANK+", "
+                                        +IDBCConstant.ATT_BANKREF_WILAYAH+", "
+                                        +IDBCConstant.ATT_BANKREF_ALAMAT+") values (?, ?, ?, ?) ");
+            pstat.setString(1, bank.getSandi());
+            pstat.setString(2, bank.getNamabank());
+            pstat.setString(3, bank.getWilayah());
+            pstat.setString(4, bank.getAlamat());
+            pstat.execute();
+            
+            long id = getMaxIndex(IDBCConstant.ATT_BANKREF_IDBANK, IDBCConstant.TABLE_BANKREF, conn);
+            
+            bank.setId(id);
+            
+            return bank;
+            
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal menambahkan bankref kedalam database.\n"+e.toString());
+        }finally{
+            if(pstat != null){
+                pstat.close();
+            }
+        }
+    }
+
+    @Override
+    public void updateBankRef(long oldbankrefid, BankRef bank, Connection conn) throws SQLException {
+        PreparedStatement pstat = null;
+        try {
+            
+            pstat = conn.prepareStatement("update "+IDBCConstant.TABLE_BANKREF+" set "
+                                        +IDBCConstant.ATT_BANKREF_SANDI+" = ?, "
+                                        +IDBCConstant.ATT_BANKREF_NAMABANK+"=?, "
+                                        +IDBCConstant.ATT_BANKREF_WILAYAH+" = ?, "
+                                        +IDBCConstant.ATT_BANKREF_ALAMAT+" = ? where "
+                                        +IDBCConstant.ATT_BANKREF_IDBANK+" = ? ");
+            pstat.setString(1, bank.getSandi());
+            pstat.setString(2, bank.getNamabank());
+            pstat.setString(3, bank.getWilayah());
+            pstat.setString(4, bank.getAlamat());
+            pstat.setLong(5, oldbankrefid);
+            pstat.execute();
+            
+            
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal memutakhirkan bankref kedalam database.\n"+e.toString());
+        }finally{
+            if(pstat != null)
+                pstat.close();
+        }
+    }
+
+    @Override
+    public void deleteBankRef(long bankrefid, Connection conn) throws SQLException {
+        PreparedStatement pstat = null;
+        try {
+            pstat = conn.prepareStatement("delete from "+IDBCConstant.TABLE_BANKREF+" where "+IDBCConstant.ATT_BANKREF_IDBANK+" = ?");
+            pstat.setLong(1, bankrefid);
+            pstat.execute();
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal menghapus bankref dari database.\n"+e.toString());
+        }finally{
+            if(pstat != null)
+                pstat.close();
+        }
+    }
+
+    @Override
+    public BankRef getBankRef(long bankrefid, Connection conn) throws SQLException {
+        Statement s = null;
+        ResultSet rs = null;
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery("select * from "+IDBCConstant.TABLE_BANKREF+" where "+IDBCConstant.ATT_BANKREF_IDBANK+" = "+bankrefid);
+            while(rs.next()){
+                return new BankRef(rs.getLong(IDBCConstant.ATT_BANKREF_IDBANK), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_SANDI), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_NAMABANK), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_WILAYAH), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_ALAMAT));
+            }
+            
+            return null;
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal mengambil data bankref dari database.\n");
+        }finally{
+            if(rs != null)
+                rs.close();
+            
+            if(s != null)
+                s.close();
+        }
+    }
+
+    @Override
+    public BankRef[] getAllBankRefByWilayah(String wilayah, Connection conn) throws SQLException {
+        Statement s = null;
+        ResultSet rs = null;
+        Vector<BankRef> vResult = new Vector<>();
+        
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery("select * from "+IDBCConstant.TABLE_BANKREF+" where "+IDBCConstant.ATT_BANKREF_WILAYAH+" = \'"+wilayah+"\'");
+            while(rs.next()){
+                vResult.addElement(new BankRef(rs.getLong(IDBCConstant.ATT_BANKREF_IDBANK), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_SANDI), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_NAMABANK), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_WILAYAH), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_ALAMAT)));
+            }
+            
+            BankRef[] result = new BankRef[vResult.size()];
+            vResult.copyInto(result);
+            return result;
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal dalam mengambil list data bankref.\n"+e.toString());
+        }finally{
+            if(rs != null)
+                rs.close();
+            
+            if(s != null)
+                s.close();
+        }
+    }
+
+    @Override
+    public BankRef[] getAllBankRef(Connection conn) throws SQLException {
+        Statement s = null;
+        ResultSet rs = null;
+        Vector<BankRef> vResult  = new Vector<>();
+        
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery("select * from "+IDBCConstant.TABLE_BANKREF);
+            
+            while(rs.next()){
+                
+                vResult.addElement(new BankRef(rs.getLong(IDBCConstant.ATT_BANKREF_IDBANK), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_SANDI), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_NAMABANK), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_WILAYAH), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_ALAMAT)));
+                
+            }
+            
+            BankRef[] result = new BankRef[vResult.size()];
+            vResult.copyInto(result);
+            return result;
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal dalam mengambil list data bankref.\n"+e.toString());
+        }finally{
+            if(rs != null)
+                rs.close();
+            
+            if(s != null)
+                s.close();
+        }
+        
+    }
+
+    @Override
+    public BankRef[] getAllBankRefSortByWilayah(Connection conn) throws SQLException {
+        Statement s = null;
+        ResultSet rs = null;
+        Vector<BankRef> vResult  = new Vector<>();
+        
+        try {
+            s = conn.createStatement();
+            rs = s.executeQuery("select * from "+IDBCConstant.TABLE_BANKREF+" order by "+IDBCConstant.ATT_BANKREF_WILAYAH);
+            
+            while(rs.next()){
+                
+                vResult.addElement(new BankRef(rs.getLong(IDBCConstant.ATT_BANKREF_IDBANK), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_SANDI), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_NAMABANK), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_WILAYAH), 
+                        rs.getString(IDBCConstant.ATT_BANKREF_ALAMAT)));
+                
+            }
+            
+            BankRef[] result = new BankRef[vResult.size()];
+            vResult.copyInto(result);
+            return result;
+        } catch (Exception e) {
+            throw new SQLException("SQLSAP : Gagal dalam mengambil list data bankref.\n"+e.toString());
+        }finally{
+            if(rs != null)
+                rs.close();
+            
+            if(s != null)
+                s.close();
         }
     }
        

@@ -1487,4 +1487,66 @@ public class BusinessLogic {
         }
     }
     
+    public BankRef createBankRef(BankRef bank, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.createBankRef(bank, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void updateBankRef(long oldbankrefid, BankRef bankref, long sessionid, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.updateBankRef(oldbankrefid, bankref, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void deleteBankRef(long bankrefid, long sessionid, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.deleteBankRef(bankrefid, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public BankRef getBankRef(long bankrefid, long sessionid, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getBankRef(bankrefid, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public BankRef[] getAllBankRefByWilayah(String wilayah, long sessionid, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllBankRefByWilayah(wilayah, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public BankRef[] getAllBankRef(long sessionid, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllBankRef(k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public BankRef[] getAllBankRefSortByWilayah(long sessionid, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllBankRefSortByWilayah(k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
 }

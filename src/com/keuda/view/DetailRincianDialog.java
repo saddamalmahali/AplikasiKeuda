@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author adam
  */
 public class DetailRincianDialog extends javax.swing.JDialog {
+    
     private Rincian k_rincian;
     private DetailRincian k_detail, parent;
     private MainForm k_mainform;

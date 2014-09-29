@@ -1,6 +1,7 @@
 package com.keuda.services;
 
 import com.keuda.model.Akun;
+import com.keuda.model.BankRef;
 import com.keuda.model.Bendahara;
 import com.keuda.model.DetailRincian;
 import com.keuda.model.DetailRincianStruktur;
@@ -381,7 +382,9 @@ public interface IKeudaSQL {
     public boolean cekDetail(Rincian rincian, String detail, Connection conn)throws SQLException;
     
     /**
+     * 
      * Departemen, Unit & Satker
+     * 
      */   
     
     public Satker createSatker(Satker satker, Connection conn)throws SQLException;
@@ -401,6 +404,7 @@ public interface IKeudaSQL {
      * @param conn
      * @return
      * @throws SQLException 
+     * 
      */
     
     public Bendahara createBendahara(Bendahara bendahara, Connection conn)throws SQLException;
@@ -426,5 +430,25 @@ public interface IKeudaSQL {
     public SPP[] getAllSPP(Connection conn)throws SQLException;
     
     public SPP[] getAllSPPByUnitOrganisasi(long unitorganisasiid, Connection conn)throws SQLException;
+    
+    /**
+     * 
+     *  BankRef
+     * 
+     */
+    
+    public BankRef createBankRef(BankRef bank, Connection conn)throws SQLException;
+    
+    public void updateBankRef(long oldbankrefid, BankRef bank, Connection conn)throws SQLException;
+    
+    public void deleteBankRef(long bankrefid, Connection conn)throws SQLException;
+    
+    public BankRef getBankRef(long bankrefid, Connection conn)throws SQLException;
+    
+    public BankRef[] getAllBankRefByWilayah(String wilayah, Connection conn)throws SQLException;
+    
+    public BankRef[] getAllBankRef(Connection conn)throws SQLException;
+    
+    public BankRef[] getAllBankRefSortByWilayah(Connection conn)throws SQLException;
     
 }
