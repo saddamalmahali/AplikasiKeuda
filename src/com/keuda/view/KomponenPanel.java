@@ -10,6 +10,7 @@ import com.keuda.model.SubKomponen;
 import com.keuda.services.IDBCConstant;
 import com.keuda.util.BunxuList;
 import com.keuda.util.ButtonAddDelPanel;
+import com.keuda.util.GroupableTableHeader;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -40,6 +41,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 
 /**
@@ -77,8 +79,20 @@ public class KomponenPanel extends KeudaPanel implements ListSelectionListener{
         k_model1 = new thisModel();
         k_model2 = new thisSubKomponenModel();
         
-        k_table = new JTable(k_model1);
-        k_tableSub = new JTable(k_model2);
+        k_table = new JTable(k_model1){
+
+            @Override
+            protected JTableHeader createDefaultTableHeader() {
+                return new GroupableTableHeader(columnModel);
+            }
+            
+        };
+        k_tableSub = new JTable(k_model2){
+            @Override
+            protected JTableHeader createDefaultTableHeader() {
+                return new GroupableTableHeader(columnModel);
+            }
+        };
         k_list = new BunxuList();
         btn_topbrowse = new JButton("...");
         
@@ -539,8 +553,8 @@ public class KomponenPanel extends KeudaPanel implements ListSelectionListener{
     public class thisSubKomponenModel extends DefaultTableModel{
 
         public thisSubKomponenModel() {
-            addColumn("Kode");
-            addColumn("Detail Sub Komponen");            
+            addColumn("<html><center>Kode</center>");
+            addColumn("<html><center>Detail Sub Komponen</center>");            
         }
 
         @Override

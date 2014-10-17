@@ -4,22 +4,12 @@
  */
 package aplikasikeuda;
 
-import com.keuda.Logic.BusinessLogic;
-import com.keuda.exception.KeudaException;
 import com.keuda.impl.service.KeudaSQL;
-import com.keuda.model.IndikatorKegiatan;
-import com.keuda.model.Komponen;
-import com.keuda.model.Program;
-import com.keuda.model.SubKomponen;
-import com.keuda.services.IDBCConstant;
 import com.keuda.services.IKeudaSQL;
 import com.keuda.util.KoneksiAplikasi;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

@@ -22,6 +22,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
  *
  * @author user
  */
+
 public class AkunEditDialog extends JDialog implements ActionListener{
     JFrame k_owner;
     AkunTreePanel k_akunPanel;

@@ -18,6 +18,10 @@ public class Satker {
     String unitdepartemen;    
     String kodesatker;
     String namasatker;
+    
+    public static final long VIEW_NAME_AND_CODE_SATKER = 0;
+    
+    long view = -1;
 
     public Satker(long satkerid, String kodedepartemen, String namadepartemen, String kodeunitdepartemen, String unitdepartemen, String kodesatker, String namasatker) {
         this.satkerid = satkerid;
@@ -98,5 +102,20 @@ public class Satker {
     public void setNamasatker(String namasatker) {
         this.namasatker = namasatker;
     }
+
+    public void setView(long view) {
+        this.view = view;
+    }
+
+    @Override
+    public String toString() {
+        if(view == VIEW_NAME_AND_CODE_SATKER){
+            return kodesatker+" "+namasatker;
+        }else{
+            return super.toString();
+        }
+    }
+    
+    
     
 }

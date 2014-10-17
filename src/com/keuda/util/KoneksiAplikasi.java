@@ -64,12 +64,12 @@ public class KoneksiAplikasi {
     public Connection getConnection2() throws IOException, SQLException, ClassNotFoundException{
         
         props2.load(inputDataKoneksi2);
-        driver = props2.getProperty("jdbc.driver");
+        driver = "com.mysql.jdbc.Driver";
         Class.forName(driver);
         
-        url = props2.getProperty("jdbc.url");
-        pass = props2.getProperty("jdbc.password");
-        username = props2.getProperty("jdbc.user");
+        url = "jdbc:mysql://localhost:3306/sqldb14";
+        pass = "";
+        username = "root";
         
         conn2 = DriverManager.getConnection(url, username, pass);
         

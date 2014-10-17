@@ -6,6 +6,7 @@ import com.keuda.model.Bendahara;
 import com.keuda.model.DetailRincian;
 import com.keuda.model.DetailRincianStruktur;
 import com.keuda.model.Dipa;
+import com.keuda.model.Fungsi;
 import com.keuda.model.GrupItem;
 import com.keuda.model.GrupKodrekRincian;
 import com.keuda.model.IkuProgram;
@@ -23,8 +24,8 @@ import com.keuda.model.ProgramDipa;
 import com.keuda.model.Rincian;
 import com.keuda.model.RincianDipa;
 import com.keuda.model.RincianDipaKodrek;
-import com.keuda.model.SPP;
 import com.keuda.model.Satker;
+import com.keuda.model.SubFungsi;
 import com.keuda.model.SubKomponen;
 import com.keuda.view.AkunStructureForTree;
 import java.sql.Connection;
@@ -419,17 +420,7 @@ public interface IKeudaSQL {
     
     public Bendahara[] getAllBendaharaBySatker(long satkerid, Connection conn)throws SQLException;
     
-    public SPP createSPP(SPP spp, Connection conn)throws SQLException;
     
-    public void updateSPP(long oldSPPId, SPP spp, Connection conn)throws SQLException;
-    
-    public void deleteSPP(long sppid, Connection conn)throws SQLException;
-    
-    public SPP getSPP(long sppid, Connection conn)throws SQLException;
-    
-    public SPP[] getAllSPP(Connection conn)throws SQLException;
-    
-    public SPP[] getAllSPPByUnitOrganisasi(long unitorganisasiid, Connection conn)throws SQLException;
     
     /**
      * 
@@ -451,4 +442,36 @@ public interface IKeudaSQL {
     
     public BankRef[] getAllBankRefSortByWilayah(Connection conn)throws SQLException;
     
+    /**
+     * 
+     * Fungsi & sub fungsi
+     * 
+     */
+    
+    public Fungsi createFungsi(Fungsi fungsi, Connection conn)throws SQLException;
+    
+    public void updateFungsi(long oldIdFungsi, Fungsi fungsi, Connection conn)throws SQLException;
+    
+    public void deleteFungsi(long idFungsi, Connection conn)throws SQLException;
+    
+    public Fungsi getFungsi(long idFungsi, Connection conn)throws SQLException;
+    
+    public Fungsi[] getAllFungsi(Connection conn)throws SQLException;
+    
+    public Fungsi getFungsiByKode(String kodefungsi, Connection conn)throws SQLException;
+       
+    public SubFungsi createSubFungsi(SubFungsi subfungsi, Connection conn)throws SQLException;
+    
+    public void updateSubFungsi(long oldIdSubFungsi, SubFungsi subfungsi, Connection conn)throws SQLException;
+    
+    public void deleteSubFungsi(long idSubFungsi, Connection conn)throws SQLException;
+    
+    public SubFungsi getSubFungsi(long idSubFungsi, Connection conn)throws SQLException;
+    
+    public SubFungsi getSubFungsiByKode(String kodesubfungsi, Connection conn)throws SQLException;
+    
+    public SubFungsi[] getAllSubFungsi(Connection conn)throws SQLException;
+    
+    public SubFungsi[] getAllSubFungsiByFungsi(long idfungsi, Connection conn)throws SQLException;
+        
 }

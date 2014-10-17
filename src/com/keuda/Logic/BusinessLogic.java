@@ -1549,4 +1549,224 @@ public class BusinessLogic {
             throw new KeudaException(e.getMessage());
         }
     }
+    
+    public Satker createSatker(Satker satker, long sessionID, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.createSatker(satker, k_conn);
+            
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void updateSatker(long oldSatkerId, Satker satker, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.updateSatker(oldSatkerId, satker, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void deleteSatker(long satkerid, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.deleteSatker(satkerid, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Satker getSatker(long satkerid, long sessionId, String message)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getSatker(satkerid, k_conn);
+            
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Satker[] getAllSatker(long sessionid, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllSatker(k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Bendahara insertBendahara(Bendahara bendahara, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.createBendahara(bendahara, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void updateBendahara(long oldBendaharaId, Bendahara bendahara, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.updateBendahara(oldBendaharaId, bendahara, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void deleteBendahara(long bendaharaid, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.deleteBendahara(bendaharaid, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Bendahara getBendahara(long bendaharaid, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getBendahara(bendaharaid, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException();
+        }
+    }
+    
+    public Bendahara[] getAllBendahara(long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllBendahara(k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Bendahara[] getAllBendaharaBySatker(long satkerid, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllBendaharaBySatker(satkerid, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Fungsi createFungsi(Fungsi fungsi, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.createFungsi(fungsi, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void updateFungsi(long oldIdFungsi, Fungsi fungsi, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.updateFungsi(oldIdFungsi, fungsi, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void deleteFungsi(long idFungsi, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.deleteFungsi(idFungsi, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Fungsi getFungsi(long idFungsi, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getFungsi(idFungsi, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Fungsi getFungsiByKode(String kodefungsi, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getFungsiByKode(kodefungsi, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public Fungsi[] getAllFungsi(long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllFungsi(k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public SubFungsi createSubFungsi(SubFungsi subfungsi, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.createSubFungsi(subfungsi, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void updateSubFungsi(long oldSubFungsiId, SubFungsi subfungsi, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.updateSubFungsi(oldSubFungsiId, subfungsi, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public void deleteSubFungsi(long subfungsiid, long sessionID, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            sql.deleteSubFungsi(subfungsiid, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public SubFungsi getSubFungsi(long subfungsiid, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getSubFungsi(subfungsiid, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public SubFungsi getSubFungsiByKode(String kodesubfungsi, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getSubFungsiByKode(kodesubfungsi, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public SubFungsi[] getAllSubFungsi(long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllSubFungsi(k_conn);
+                    
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
+    public SubFungsi[] getAllSubFungsiByFungsi(long idfungsi, long sessionId, String modul)throws KeudaException{
+        try {
+            IKeudaSQL sql = new KeudaSQL();
+            return sql.getAllSubFungsiByFungsi(idfungsi, k_conn);
+        } catch (Exception e) {
+            throw new KeudaException(e.getMessage());
+        }
+    }
+    
 }

@@ -46,7 +46,9 @@ public interface IDBCConstant {
     public static final String ATT_KEGIATAN_PROGRAM_INDEX = "programindex";
     public static final String ATT_KEGIATAN_CODE = "kegiatancode";
     public static final String ATT_KEGIATAN_NAME = "kegiatanname";
+    
     //Program DIPA, Outcome Program & Iku Program
+    
     public static final String TABLE_PROGRAM_DIPA = "programdipa";
     public static final String TABLE_OUTCOME_PROGRAM = "outcomeprogram";
     public static final String TABLE_IKU_PROGRAM = "ikuprogram";
@@ -207,7 +209,9 @@ public interface IDBCConstant {
     public static final String ATT_MARKMAP_NMREK = "nmperk6";
 
     /**
+     * 
      * Departemen, Unitdepartemen & Satker
+     * 
      */
     
     public static final String TABLE_SATKER = "satker";
@@ -224,9 +228,12 @@ public interface IDBCConstant {
      * Bendahara, SPP
      */
     
-    public static final String TABLE_BENDAHARA = "bendaharapengeluaran";
+    public static final String TABLE_BENDAHARA = "bendahara";
     public static final String ATT_BENDAHARA_BENDAHARAINDEX = "bendaharaindex";
-    public static final String ATT_BENDAHARA_SATKER = "satker";
+    public static final String ATT_BENDAHARA_KODEBENDAHARA = "kodebendahara";
+    public static final String ATT_BENDAHARA_BANKID = "bankid";
+    public static final String ATT_BENDAHARA_SATKER = "satkerid";
+    public static final String ATT_BENDAHARA_NAMA = "nama";
     public static final String ATT_BENDAHARA_JENISBENDAHARA = "jenisbendahara";
     public static final String ATT_BENDAHARA_NIP = "nip";
     public static final String ATT_BENDAHARA_ALAMAT = "alamat";
@@ -235,7 +242,7 @@ public interface IDBCConstant {
     public static final String ATT_BENDAHARA_REKENING = "rekening";
     public static final String ATT_BENDAHARA_SALDO = "saldo";
     public static final String ATT_BENDAHARA_NPWP = "npwp";
-    public static final String ATT_BENDAHARA_TANGGAL = "tanggalstop";
+    public static final String ATT_BENDAHARA_TANGGAL = "tanggal";
     
     public static final String TABLE_SPP = "spp";
     public static final String ATT_SPP_SPPINDEX = "sppindex";
@@ -265,5 +272,18 @@ public interface IDBCConstant {
     public static final String ATT_BANKREF_NAMABANK = "namabank";
     public static final String ATT_BANKREF_WILAYAH = "wilayah";
     public static final String ATT_BANKREF_ALAMAT = "alamat";
+    
+    //Fungsi, SubFungsi
+    public static final String TABLE_FUNGSI = "fungsi";
+    public static final String ATT_FUNGSI_IDFUNGSI = "idfungsi";
+    public static final String ATT_FUNGSI_KODEFUNGSI = "kodefungsi";
+    public static final String ATT_FUNGSI_NAMAFUNGSI = "namafungsi";
+    
+    public static final String TABLE_SUBFUNGSI = "subfungsi";
+    public static final String ATT_SUBFUNGSI_IDSUBFUNGSI = "idsubfungsi";
+    public static final String ATT_SUBFUNGSI_IDFUNGSI = "idfungsi";
+    public static final String ATT_SUBFUNGSI_KODESUBFUNGSI = "kodesubfungsi";
+    public static final String ATT_SUBFUNGSI_NAMASUBFUNGSI = "namasubfungsi";
+    
 
 }

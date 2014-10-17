@@ -17,6 +17,8 @@ import com.keuda.util.RowColor;
 import com.keuda.util.RowColorTableRender;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -87,8 +89,17 @@ public class RincianKertasKerjaSatker extends KeudaPanel{
             protected JTableHeader createDefaultTableHeader() {
                 return new GroupableTableHeader(columnModel);
             }
+
+            @Override
+            public int getAutoResizeMode() {
+                return super.getAutoResizeMode(); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            
             
         };
+        
+        k_table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         
         TableColumnModel cm = k_table.getColumnModel();
         
@@ -100,7 +111,7 @@ public class RincianKertasKerjaSatker extends KeudaPanel{
         
         header.addColumnGroup(cg);
         
-        JScrollPane scroll = new JScrollPane(k_table);
+        JScrollPane scroll = new JScrollPane(k_table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         
         panel.add(scroll);
         getContentPane().add(panel, BorderLayout.CENTER);
@@ -985,7 +996,7 @@ public class RincianKertasKerjaSatker extends KeudaPanel{
             addColumn("KODE");//0
             addColumn("PROGRAM/KEGIATAN/OUTPUT/SUBOUTPUT/KOMPONEN/SUBKOMP/AKUN/DETIL");//1
             addColumn("VOLUME");//2
-            addColumn("HARGA SATUAN");//3
+            addColumn("<html><center>HARGA <br/>SATUAN</center>");//3
             addColumn("JUMLAH BIAYA");//4
             addColumn("SD/CP");//5
             

@@ -65,8 +65,10 @@ public class MainForm extends javax.swing.JFrame {
     MasterVolumePanel masterVolumePanel;
     private KomponenPanel komponenPanel;
     RincianKertasKerjaSatker rkkjpanel;
-    SPPPanel spppanel;
+    FungsiSubFungsiPanel fungsipanel;
+    
     BankPanel bankpanel;
+    BendaharaPanel bendaharapanel;
     
     Font font = null;
     
@@ -187,9 +189,11 @@ public class MainForm extends javax.swing.JFrame {
         mi_master_akun = new javax.swing.JMenuItem();
         mni_satuanvolume = new javax.swing.JMenuItem();
         mni_bank = new javax.swing.JMenuItem();
+        mnibendahara = new javax.swing.JMenuItem();
         mnuProgramKegiatan = new javax.swing.JMenu();
         mni_Program = new javax.swing.JMenuItem();
         mni_kegiatan = new javax.swing.JMenuItem();
+        mni_fungsi = new javax.swing.JMenuItem();
         mnu_dipa = new javax.swing.JMenu();
         mnuProgramDipa = new javax.swing.JMenuItem();
         mni_outcome = new javax.swing.JMenuItem();
@@ -205,13 +209,15 @@ public class MainForm extends javax.swing.JFrame {
         mniDIPA = new javax.swing.JMenuItem();
         mni_rkkj = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        mniSppUp = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Aplikasi Keuangan Daerah");
 
         jDesktopPane1.setBackground(new java.awt.Color(241, 241, 241));
+
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(164, 40));
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/keuda/images/mnu_aplikasi.png"))); // NOI18N
         jMenu1.setToolTipText("aplikasi");
@@ -297,6 +303,14 @@ public class MainForm extends javax.swing.JFrame {
         });
         mniDataMaster.add(mni_bank);
 
+        mnibendahara.setText("Supplier/Bendahara");
+        mnibendahara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnibendaharaActionPerformed(evt);
+            }
+        });
+        mniDataMaster.add(mnibendahara);
+
         mnuProgramKegiatan.setText("Program & Kegiatan");
 
         mni_Program.setText("Program");
@@ -317,9 +331,17 @@ public class MainForm extends javax.swing.JFrame {
 
         mniDataMaster.add(mnuProgramKegiatan);
 
+        mni_fungsi.setText("Fungsi/SubFungsi");
+        mni_fungsi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mni_fungsiActionPerformed(evt);
+            }
+        });
+        mniDataMaster.add(mni_fungsi);
+
         jMenuBar1.add(mniDataMaster);
 
-        mnu_dipa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/keuda/images/mnu_dipa_32x32.png"))); // NOI18N
+        mnu_dipa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/keuda/images/mnu_dipa.png"))); // NOI18N
         mnu_dipa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mnu_dipaActionPerformed(evt);
@@ -418,18 +440,14 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenuBar1.add(mnu_dipa);
 
-        jMenu2.setText("SPP");
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/keuda/images/mnu_spp.png"))); // NOI18N
 
-        jMenuItem1.setText("RUH SPP");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem1);
+        jMenu3.setText("RUH SPP");
 
-        jMenuItem2.setText("Cetak SPP");
-        jMenu2.add(jMenuItem2);
+        mniSppUp.setText("SPP UP");
+        jMenu3.add(mniSppUp);
+
+        jMenu2.add(jMenu3);
 
         jMenuBar1.add(jMenu2);
 
@@ -443,13 +461,14 @@ public class MainForm extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void mi_master_akunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mi_master_akunActionPerformed
+        
         KeudaInternalFrame kif = new KeudaInternalFrame();
         akunPanel = new AkunTreePanel(this);
         
@@ -801,21 +820,6 @@ public class MainForm extends javax.swing.JFrame {
             kif.setVisible(true);
     }//GEN-LAST:event_mni_rkkjActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        KeudaInternalFrame kif = new KeudaInternalFrame();
-            spppanel = new SPPPanel(this);
-            kif.setContentPane(spppanel);
-            spppanel.setVisible(true);
-            jDesktopPane1.add(kif);
-            kif.setResizable(true);
-            kif.setFrameIcon(new ImageIcon(getClass().getResource("/com/keuda/images/program_18.png")));
-            kif.setTitle("Rincian Kertas Kerja Satker TA. 2014");
-            kif.setSize(800, 500);
-            kif.setMaximizable(false);
-            
-            kif.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void mniDataMasterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniDataMasterActionPerformed
         
     }//GEN-LAST:event_mniDataMasterActionPerformed
@@ -834,6 +838,36 @@ public class MainForm extends javax.swing.JFrame {
             
             kif.setVisible(true);
     }//GEN-LAST:event_mni_bankActionPerformed
+
+    private void mnibendaharaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnibendaharaActionPerformed
+        KeudaInternalFrame kif = new KeudaInternalFrame();
+            bendaharapanel = new BendaharaPanel(this);
+            kif.setContentPane(bendaharapanel);
+            bendaharapanel.setVisible(true);
+            jDesktopPane1.add(kif);
+            kif.setResizable(true);
+            kif.setFrameIcon(new ImageIcon(getClass().getResource("/com/keuda/images/program_18.png")));
+            kif.setTitle("Rincian Kertas Kerja Satker TA. 2014");
+            kif.setSize(1114, 500);
+//            kif.setMaximizable(false);
+            
+            kif.setVisible(true);
+    }//GEN-LAST:event_mnibendaharaActionPerformed
+
+    private void mni_fungsiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mni_fungsiActionPerformed
+            KeudaInternalFrame kif = new KeudaInternalFrame();
+            fungsipanel = new FungsiSubFungsiPanel(this);
+            kif.setContentPane(fungsipanel);
+            fungsipanel.setVisible(true);
+            jDesktopPane1.add(kif);
+            kif.setResizable(true);
+            kif.setFrameIcon(new ImageIcon(getClass().getResource("/com/keuda/images/program_18.png")));
+            kif.setTitle("Fungi / Sub Fungsi");
+            kif.setSize(500, 500);
+//            kif.setMaximizable(false);
+            
+            kif.setVisible(true);
+    }//GEN-LAST:event_mni_fungsiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -865,7 +899,9 @@ public class MainForm extends javax.swing.JFrame {
                     JDialog.setDefaultLookAndFeelDecorated(false);
                     try {
 //                    UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+//                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+                    
                         
                         
 //                    Theme.loadTheme(new File(System.getProperty("user.dir"), "theme/Default.theme").toURI().toURL());
@@ -899,9 +935,8 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
@@ -915,9 +950,11 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniIndikatorKegiatanBeta;
     private javax.swing.JMenuItem mniKomponen;
     private javax.swing.JMenuItem mniOutputKegiatan;
+    private javax.swing.JMenuItem mniSppUp;
     private javax.swing.JMenuItem mni_IkuProgram;
     private javax.swing.JMenuItem mni_Program;
     private javax.swing.JMenuItem mni_bank;
+    private javax.swing.JMenuItem mni_fungsi;
     private javax.swing.JMenuItem mni_indikatorKegiatan;
     private javax.swing.JMenuItem mni_kegiatan;
     private javax.swing.JMenuItem mni_kegiatanDipa;
@@ -925,6 +962,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem mni_outke_beta;
     private javax.swing.JMenuItem mni_rkkj;
     private javax.swing.JMenuItem mni_satuanvolume;
+    private javax.swing.JMenuItem mnibendahara;
     private javax.swing.JMenuItem mnuProgramDipa;
     private javax.swing.JMenu mnuProgramKegiatan;
     private javax.swing.JMenu mnu_dipa;
